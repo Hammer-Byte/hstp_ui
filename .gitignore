@@ -1,0 +1,51 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+.bun/
+bun.lockb
+
+# =========================
+# Next.js
+# =========================
+.next/
+out/
+build/
+.vercel/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# =========================
+# Logs
+# =========================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+
+# =========================
+# OS / Editor junk
+# =========================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# =========================
+# TypeScript
+# =========================
+*.tsbuildinfo
+
+# =========================
+# shadcn/ui
+# =========================
+components/ui/.DS_Store
