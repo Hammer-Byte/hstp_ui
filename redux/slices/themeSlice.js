@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  mode: 'system', // 'light', 'dark', 'system' - though next-themes handles this, Redux can store preferences if needed elsewhere
+  mode: 'light', // 'light', 'dark', 'system' - though next-themes handles this, Redux can store preferences if needed elsewhere
 };
 
 const themeSlice = createSlice({

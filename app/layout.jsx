@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "../components/redux-provider";
 import { ThemeProvider } from "../components/theme-provider";
+import ThemeSync from "../components/theme-sync";
 
 /**
  * Global font configuration
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
+            <ThemeSync />
             {children}
           </ThemeProvider>
         </ReduxProvider>
