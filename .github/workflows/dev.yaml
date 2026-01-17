@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            DEPLOYMENT_DIRECTORY: "/var/www/sites/dev-hstp.sahasinstitute.com/"
+            DEPLOYMENT_DIRECTORY: "/var/www/sites/dev-hstp.hammerbyte.co.in/"
             REPO: "hstp_ui"
             BRANCH: ${{ github.ref_name }}
             PORT: 12000
