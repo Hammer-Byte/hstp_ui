@@ -1,0 +1,110 @@
+.testimonial-section {
+    padding: 30px 42px 24px 42px;
+}
+
+.testimonial-section .section-title {
+    font-family: Poppins, sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 24px;
+}
+
+.testimonial-card {
+    border: 1px solid #d9d9d9;
+    border-radius: 32px;
+    height: 249px;
+    width: 100%;
+    padding: 34px 26px;
+}
+
+.testimonial-card img {
+    width: 63px;
+    height: 63px;
+}
+
+.testimonial-card h6 {
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    line-height: 23px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.testimonial-card p {
+    font-family: Poppins, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.testimonial-card h5 {
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 23px;
+    color: #000;
+    padding-top: 14px;
+}
+
+.testimonial-card span {
+    font-family: Poppins, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 23px;
+    color: #212121;
+}
+
+.testimonial-swiper .swiper-button-next,
+.testimonial-swiper .swiper-button-prev,
+.testimonial-swiper .swiper-pagination {
+    display: none;
+}
+
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+    width: auto;
+}
+
+.testimonial-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.testimonial-prev,
+.testimonial-next {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #000;
+    line-height: 1;
+}
+
+.testimonial-prev:hover,
+.testimonial-next:hover {
+    opacity: 0.6;
+}
+
+.testimonial-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.testimonial-dots .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border: 1px solid #212121;
+    opacity: 1;
+}
+
+.testimonial-dots .swiper-pagination-bullet-active {
+    background: #000;
+}
