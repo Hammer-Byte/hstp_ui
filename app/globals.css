@@ -15,8 +15,8 @@
   --color-brand-primary: #673AB7; /* Vibrant Purple */
   --color-brand-secondary: #512DA8; /* Deep Purple */
 
-  --color-background: #F8FAFC; 
-  --color-foreground: #0F172A;
+  --color-background: #ffffff; 
+  --color-foreground: #212121;
 
   --color-surface: #ffffff;
   --color-surface-foreground: #0F172A;
@@ -42,7 +42,7 @@
   --color-secondary-foreground: #475569;
 
   --color-muted: #F8FAFC;
-  --color-muted-foreground: #64748B;
+  --color-muted-foreground: #757575;
 
   --color-border: #E2E8F0;
   --color-input: #F1F5F9;
@@ -56,7 +56,7 @@
   --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --foreground: #212121;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
@@ -66,7 +66,7 @@
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
+  --muted-foreground: #757575;
   --accent: oklch(0.968 0.007 247.896);
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
@@ -192,24 +192,10 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    @apply bg-background text-foreground antialiased;
-  }
+  --width-2xl: 1440px;
 }
 
 @layer utilities {
@@ -263,6 +249,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    @apply bg-background text-foreground antialiased;
   }
 }

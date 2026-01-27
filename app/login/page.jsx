@@ -24,9 +24,11 @@ export default function LoginPage() {
   }, [loading, router]);
 
   return (
-    <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-background">
-      <LoginLeftPanel />
-      <LoginForm loading={loading} onLogin={handleLogin} />
+    <div className="flex items-center justify-center h-[calc(100dvh-66px)] bg-background w-full px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 bg-background max-w-7xl w-full mx-auto">
+        <LoginLeftPanel />
+        <LoginForm loading={loading} onLogin={handleLogin} />
+      </div>
     </div>
   );
 }
