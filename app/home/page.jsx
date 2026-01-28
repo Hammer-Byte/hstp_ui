@@ -1,12 +1,12 @@
 import React from "react";
 
 import Hero from "../../components/home/Hero";
-import Carousels from "@/components/home/Carousels";
+import SkillCarousels from "@/components/home/SkillCarousels";
 export default function Home() {
   return (
     <div>
       <Hero />
-      <Carousels />
+      <SkillCarousels />
     </div>
   );
 }

@@ -7,9 +7,8 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { SKILLS_DATA } from "@/app/utils/carouselList";
-import CarouselCard from "./CarouselCard";
-
+import { SKILLS_DATA } from "@/app/utils/skillCarouselList";
+import SkillCarouselCard from "./SkillCarouselCard";
 export default function Carousels() {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(0);
@@ -46,7 +45,7 @@ export default function Carousels() {
               key={i}
               className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
             >
-              <CarouselCard item={item} />
+              <SkillCarouselCard item={item} />
             </CarouselItem>
           ))}
         </CarouselContent>
