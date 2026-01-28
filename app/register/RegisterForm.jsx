@@ -5,22 +5,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 
-const loginSchema = z.object({
+const registerSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
   terms: z.boolean().optional(),
-  // terms: z.boolean().refine((val) => val === true, {
-  //   message: "You must agree to the terms and conditions",
-  // }),
-  
 });
 
-export default function LoginForm({ loading, onLogin }) {
+export default function RegisterForm({ loading, onRegister }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -30,8 +27,9 @@ export default function LoginForm({ loading, onLogin }) {
     watch,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
       terms: false,
@@ -41,8 +39,7 @@ export default function LoginForm({ loading, onLogin }) {
   const termsValue = watch("terms");
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    onLogin(data);
+    onRegister(data);
   };
 
   return (
@@ -50,11 +47,29 @@ export default function LoginForm({ loading, onLogin }) {
       <div className="mx-auto w-full max-w-md space-y-10">
         <div className="text-center m-0">
           <h1 className="text-3xl font-bold tracking-tight text-foreground mb-[14px]">
-            Login With e-mail
+            Sign-Up With e-mail
           </h1>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 h-full flex flex-col justify-center">
+          {/* NAME */}
+          <div className="space-y-2">
+            <div className="relative group">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
+                <User className="h-5 w-5" />
+              </div>
+              <Input
+                {...register("name")}
+                type="text"
+                placeholder="Enter Your Name"
+                className={`h-14 pl-12 rounded-md border-gray-200 bg-white shadow-sm focus:border-primary focus:ring-1 focus:ring-primary transition-all text-base ${errors.name ? "border-destructive focus:ring-destructive" : ""}`}
+              />
+            </div>
+            {errors.name && (
+              <p className="text-xs font-medium text-destructive ml-1">{errors.name.message}</p>
+            )}
+          </div>
+
           {/* EMAIL */}
           <div className="space-y-2">
             <div className="relative group">
@@ -105,7 +120,7 @@ export default function LoginForm({ loading, onLogin }) {
 
           {/* TERMS */}
           <div className="space-y-2">
-            <div className="flex justify-center items-center space-x-3">
+            <div className="flex justify-start items-center space-x-3">
               <Checkbox 
                 id="terms" 
                 checked={termsValue}
@@ -115,9 +130,9 @@ export default function LoginForm({ loading, onLogin }) {
                 I agree to the <span className="font-semibold text-foreground underline underline-offset-4">Terms & Conditions</span> and <span className="font-semibold text-foreground underline underline-offset-4">Privacy Policy</span>
               </label>
             </div>
-            {/* {errors.terms && (
-              <p className="text-xs text-center font-medium text-destructive">{errors.terms.message}</p>
-            )} */}
+            {errors.terms && (
+              <p className="text-xs font-medium text-destructive">{errors.terms.message}</p>
+            )}
           </div>
 
           {/* BUTTONS */}
@@ -127,16 +142,16 @@ export default function LoginForm({ loading, onLogin }) {
               disabled={loading}
               className="w-full h-14 rounded-2xl bg-primary text-white text-lg font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all active:scale-[0.98]"
             >
-              {loading ? "Logging in..." : "Continue"}
+              {loading ? "Signing up..." : "Continue"}
             </Button>
 
-            <Link href="/register" className="block w-full">
+            <Link href="/login" className="block w-full">
               <Button
                 variant="outline"
                 type="button"
                 className="w-full h-14 rounded-2xl border-primary text-primary hover:bg-primary/5 text-lg font-semibold transition-all active:scale-[0.98]"
               >
-                Create a Account
+                Login Existing Account
               </Button>
             </Link>
           </div>
