@@ -28,7 +28,7 @@ export default function Carousels() {
   );
 
   return (
-    <section className="w-full py-16 ">
+    <section className="w-full py-10 ">
       <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">
         Learn Skills{" "}
         <span className="text-[var(--color-brand-primary)]">That Matter</span>
@@ -39,7 +39,7 @@ export default function Carousels() {
         opts={{ align: "start", loop: true }}
         className="w-full max-w-[1440px] mx-auto"
       >
-        <CarouselContent className="-ml-4">
+        <CarouselContent className="-ml-4 ">
           {SKILLS_DATA.map((item, i) => (
             <CarouselItem
               key={i}
