@@ -10,13 +10,13 @@
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
 
-  --font-sans: var(--font-poppins), system-ui, sans-serif;
-
   --color-brand-primary: #673AB7; /* Vibrant Purple */
   --color-brand-secondary: #512DA8; /* Deep Purple */
 
+  --color-text-white: #ffffff;
+  --color-text-main: #212121;
   --color-background: #ffffff; 
-  --color-foreground: #212121;
+  --color-foreground: var(--color-text-main);
 
   --color-surface: #ffffff;
   --color-surface-foreground: #0F172A;
@@ -144,6 +144,16 @@
 }
 
 @theme inline {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --container-center: true;
+  --container-padding: 1rem;
+
+  --color-text-main: var(--color-text-main);
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
 
@@ -164,6 +174,11 @@
 
   --color-muted: var(--color-muted);
   --color-muted-foreground: var(--color-muted-foreground);
+  --color-text-shaded: #757575;
+  --color-text-white: var(--color-text-white);
+
+  --color-text-main: #212121;
+
 
   --color-border: var(--color-border);
   --color-input: var(--color-input);
@@ -248,8 +263,29 @@
   * {
     @apply border-border outline-ring/50;
   }
+  .container {
+    @media (max-width: 1280px) {
+      max-width: 100% !important;
+    }
+  }
+
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-poppins);
     @apply bg-background text-foreground antialiased;
+  }
+  h1 {
+    @apply md:mb-2 lg:mb-3 xl:mb-4 text-lg md:text-xl lg:text-2xl xl:text-2xl 2xl:text-4xl font-semibold text-text-main leading-tight;
+  }
+  h2 {
+    @apply md:mb-2 lg:mb-3 xl:mb-4 text-lg md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl font-semibold text-text-main leading-tight;
+  }
+  h3 {
+    @apply md:mb-2 lg:mb-3 xl:mb-4 text-lg md:text-lg lg:text-xl xl:text-xl 2xl:text-2xl font-semibold text-text-main leading-tight;
+  }
+  h4 {
+    @apply md:mb-2 lg:mb-3 xl:mb-4 text-base md:text-base lg:text-lg xl:text-lg 2xl:text-xl font-semibold text-text-main leading-tight;
+  }
+  h5 {
+    @apply md:mb-2 lg:mb-3 xl:mb-4 text-sm md:text-base lg:text-base xl:text-base 2xl:text-lg font-semibold text-text-main leading-tight;
   }
 }

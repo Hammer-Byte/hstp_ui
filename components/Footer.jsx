@@ -14,8 +14,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 max-w-6xl mx-auto">
           {/* Explore */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-6">Explore</h3>
-            <ul className="space-y-3 text-primary-foreground/80">
+            <h3 className="text-xl font-semibold mb-6 text-primary-foreground">Explore</h3>
+            <ul className="space-y-3 text-primary-foreground">
               <li><Link href="#" className="hover:text-white transition-colors">Courses</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">Categories</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">Popular Skills</Link></li>
@@ -25,8 +25,8 @@ export default function Footer() {
 
           {/* For Learners */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-6">For Learners</h3>
-            <ul className="space-y-3 text-primary-foreground/80">
+            <h3 className="text-xl font-semibold mb-6 text-primary-foreground">For Learners</h3>
+            <ul className="space-y-3 text-primary-foreground">
               <li><Link href="#" className="hover:text-white transition-colors">My Dashboard</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">My Courses</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">Certificates</Link></li>
@@ -36,8 +36,8 @@ export default function Footer() {
 
           {/* For Hotels */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-6">For Hotels</h3>
-            <ul className="space-y-3 text-primary-foreground/80">
+            <h3 className="text-xl font-semibold mb-6 text-primary-foreground">For Hotels</h3>
+            <ul className="space-y-3 text-primary-foreground">
               <li><Link href="#" className="hover:text-white transition-colors">Train Your Team</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">Corporate Plans</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">Admin Dashboard</Link></li>
@@ -47,8 +47,8 @@ export default function Footer() {
 
           {/* Company */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold mb-6">Company</h3>
-            <ul className="space-y-3 text-primary-foreground/80">
+            <h3 className="text-xl font-bold mb-6 text-primary-foreground">Company</h3>
+            <ul className="space-y-3 text-primary-foreground">
               <li><Link href="#" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">Careers</Link></li>
               <li><Link href="#" className="hover:text-white transition-colors">Blog / Resources</Link></li>
