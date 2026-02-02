@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export default function HeroLeft() {
   return (
     <div className="flex flex-col gap-3 text-[var(--color-surface)]">
-      <h1 className="text-3xl md:text-4xl lg:text-[40px] font-semibold ">
+      <h1 className="text-3xl text-[var(--color-surface)] md:text-4xl lg:text-[40px] font-semibold ">
         Build World-Class Hospitality <br className="hidden md:block" />
         Skills.
       </h1>

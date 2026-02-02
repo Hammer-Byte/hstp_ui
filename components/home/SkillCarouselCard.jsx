@@ -18,7 +18,7 @@ export default function CarouselCard({ item }) {
       </div>
 
       <div className="flex items-center justify-between p-4">
-        <span className="bg-[var(--color-foreground)] text-white rounded-full px-13 py-5 text-sm truncate whitespace-nowrap overflow-hidden">
+        <span className="bg-[var(--color-foreground)] text-white rounded-full  px-12 py-4 text-sm  whitespace-nowrap overflow-hidden">
           {item.tag}
         </span>
         <button className="w-12 h-12 flex-shrink-0 flex items-center justify-center border border-3 border-black rounded-full hover:bg-black hover:text-white transition-colors">
