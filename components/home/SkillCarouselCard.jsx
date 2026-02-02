@@ -12,16 +12,18 @@ export default function CarouselCard({ item }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 1024px) 50vw, 336px"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent flex items-end p-6">
-          <p className="text-white text-2xl font-medium truncate w-full">{item.title}</p>
+        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent flex items-end p-6">
+          <p className="text-white text-lg font-medium  w-full">
+            {item.title}
+          </p>
         </div>
       </div>
 
       <div className="flex items-center justify-between p-4">
-        <span className="bg-[var(--color-foreground)] text-white rounded-full  px-12 py-4 text-sm  whitespace-nowrap overflow-hidden">
+        <span className="bg-foreground flex items-center justify-center text-white rounded-full  w-45 h-10 text-sm  whitespace-nowrap overflow-hidden">
           {item.tag}
         </span>
-        <button className="w-12 h-12 flex-shrink-0 flex items-center justify-center border border-3 border-black rounded-full hover:bg-black hover:text-white transition-colors">
+        <button className="w-10 h-10 shrink-0 flex items-center justify-center border-3 border-black rounded-full hover:bg-black hover:text-white transition-colors">
           <ChevronRight className="w-6 h-6" strokeWidth={2.5} />
         </button>
       </div>
