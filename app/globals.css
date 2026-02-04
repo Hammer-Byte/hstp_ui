@@ -155,6 +155,7 @@
 
   --color-brand-primary: #673AB7;
   --color-brand-secondary: #512DA8;
+  --color-dark-brand: #2E1A51;  
   --color-brand-main: var(--color-brand-primary);
 
   --color-text-main: #212121;

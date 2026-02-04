@@ -73,7 +73,7 @@ const CourseCard = ({
         </div>
 
         {/* Price & Badge Row */}
-        <div className="flex items-center justify-between mt-auto pt-2">
+        <div className="flex items-center justify-between pt-2">
           {badgeText && (
             <Badge className="px-4 py-1.5 bg-[#FFF9C4] text-[#F9A825] text-[12px] font-bold rounded-lg border border-[#FFF59D] hover:bg-[#FFF59D] transition-colors">
               {badgeText}

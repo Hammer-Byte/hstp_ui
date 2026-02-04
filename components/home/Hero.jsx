@@ -2,13 +2,14 @@ import HeroLeft from "./HeroLeft";
 import Image from "next/image";
 export default function Hero() {
   return (
-    <div className="relative w-full h-100  lg:h-125 2xl:h-140  bg-linear-to-br from-(--color-brand-primary) to-brand-secondary flex items-center px-6 lg:px-12 pb-12 overflow-hidden">
-      <div className="relative z-10 w-full max-w-4xl">
-        <div className="w-full md:max-w-[80%] lg:max-w-[70%]">
+    <div className="w-full bg-linear-to-b from-(--color-brand-primary) to-dark-brand">
+    <div className="relative container mx-auto h-100 lg:h-105 xl:h-130 2xl:h-140 flex items-center py-4 md:py-6 lg:py-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="z-10 md:max-w-[80%] lg:max-w-[60%] xl:max-w-[75%]">
+        <div className="w-full">
           <HeroLeft />
         </div>
       </div>
-      <div className="absolute right-0 bottom-0 h-full w-[50%] lg:w-[60%] -mr-22 lg:-mr-25 pointer-events-none select-none">
+      <div className="absolute right-0 bottom-0 h-full w-[50%] lg:w-[55%] xl:w-[60%] -mr-22 lg:-mr-25 pointer-events-none select-none">
         <Image
           src="/hero-sec-image.png"
           alt="Hero Section Illustration"
@@ -18,6 +19,7 @@ export default function Hero() {
           priority
         />
       </div>
+    </div>
     </div>
   );
 }
