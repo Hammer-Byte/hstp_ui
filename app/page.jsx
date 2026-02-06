@@ -4,6 +4,7 @@ import PopularCourses from "@/components/home/PopularCourses";
 import SystemCarousels from "@/components/home/SystemCarousels";
 import Testimonials from "@/components/home/Testimonials";
 import IndustryExperts from "@/components/home/IndustryExperts";
+import SkillBasedCourses from "@/components/home/SkillBasedCourses";
 import { courseData } from "./(app)/constant";
 import Carousels from "@/components/home/SkillCarousels";
 
@@ -18,9 +19,10 @@ export default function Home() {
           highlight="Courses"
           items={courseData}
         />
+        <IndustryExperts />
+        <SkillBasedCourses />
         <SystemCarousels />
         <HomeSkillCarousel />
-        {/* <IndustryExperts /> */}
         <Testimonials />
       </div>
     </div>

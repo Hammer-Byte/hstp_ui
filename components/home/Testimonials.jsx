@@ -29,7 +29,7 @@ export default function Testimonials() {
   }, [api]);
 
   return (
-    <section className="w-full flex flex-col gap-6">
+    <section className="w-full flex flex-col gap-4">
       <h2 className="text-text-main">
         Testimonials & <span className="text-primary">Success Stories</span>
       </h2>

@@ -21,7 +21,7 @@ const CourseCard = ({
 }) => {
   return (
     <div className={cn(
-      "group bg-white rounded-[24px] border p-3 transition-all hover:shadow-xl hover:shadow-gray-200/50 flex flex-col gap-4 w-[290px] h-[450px] shrink-0",
+      "group bg-white rounded-[24px] border p-3 transition-all hover:shadow-xl hover:shadow-gray-200/50 flex flex-col gap-4 md:w-[300px] lg:w-[350px] xl:w-[370px] 2xl:w-[400px] h-[400px] md:h-[430px] lg:h-[470px] xl:h-[480px] 2xl:h-[510px] shrink-0",
       "border-[#D9D9D9]",
       className
     )}>
@@ -45,10 +45,10 @@ const CourseCard = ({
       {/* Content Section */}
       <div className="flex flex-col flex-1 gap-2.5">
         <div className="space-y-1">
-          <h3 className="text-[18px] font-bold text-text-main leading-tight line-clamp-2 min-h-[50px]">
+          <h3 className="2xl:text-[22px] xl:text-[21px] lg:text-[20px] md:text-[18px] font-medium text-text-main leading-tight line-clamp-2 min-h-[50px]">
             {title}
           </h3>
-          <p className="text-[12px] text-text-shaded font-medium">by {author}</p>
+          <p className="2xl:text-[15px] xl:text-[14px] lg:text-[13px] md:text-[12px] text-text-shaded font-medium">by {author}</p>
         </div>
 
         {/* Rating & Badge Row */}
@@ -58,7 +58,7 @@ const CourseCard = ({
               <Star 
                 key={i} 
                 className={cn(
-                  "w-3.5 h-3.5",
+                  "2xl:w-4.5 2xl:h-4.5",
                   i < Math.floor(rating) 
                     ? "fill-yellow-400 text-yellow-400" 
                     : "fill-gray-200 text-gray-200"
@@ -66,8 +66,8 @@ const CourseCard = ({
               />
             ))}
           </div>
-          <div className="flex items-center gap-1 text-[11px] font-semibold text-text-shaded">
-            <Users className="w-3 h-3" />
+          <div className="flex items-center gap-1 2xl:text-[14px] xl:text-[13px] lg:text-[12px] md:text-[11px] font-semibold text-text-shaded">
+            <Users className="2xl:w-4 2xl:h-4 xl:w-3.5 xl:h-3.5 lg:w-3 lg:h-3" />
             <span>({reviewsCount})</span>
           </div>
         </div>
@@ -75,17 +75,17 @@ const CourseCard = ({
         {/* Price & Badge Row */}
         <div className="flex items-center justify-between pt-2">
           {badgeText && (
-            <Badge className="px-4 py-1.5 bg-[#FFF9C4] text-[#F9A825] text-[12px] font-bold rounded-lg border border-[#FFF59D] hover:bg-[#FFF59D] transition-colors">
+            <Badge className="px-3 py-1 bg-[#E3D4FF] text-primary text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px]  font-semibold rounded-sm border border-[#E3D4FF] hover:bg-[#E3D4FF] transition-colors">
               {badgeText}
             </Badge>
           )}
-          <div className="text-[20px] font-bold text-text-main">
+          <div className="lg:text-[22px] xl:text-[23px] 2xl:text-[24px] font-semibold text-text-main">
             ₹ {price}/-
           </div>
         </div>
 
         {/* Action Button */}
-        <Button className="w-full h-12 bg-primary hover:bg-primary/90 text-[16px] font-bold rounded-full mt-2 transition-all active:scale-[0.98]">
+        <Button className="w-full h-12 bg-primary hover:bg-primary/90 md:text-[16px] xl:text-[17px] lg:text-[18px] font-bold rounded-full mt-2 transition-all active:scale-[0.98]">
           Purchase
         </Button>
       </div>
