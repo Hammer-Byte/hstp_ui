@@ -12,7 +12,7 @@ const TestimonialCard = ({ image, name, role, rating, content, className }) => {
       className
     )}>
       <div className="flex items-center gap-4">
-        <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary/10">
+        <div className="relative lg:w-16 lg:h-16 xl:w-17 xl:h-17 2xl:w-18 2xl:h-18 rounded-full overflow-hidden">
           <Image
             // src={image || "/sample-course.png"}
             src={"/sample-course.png"}
@@ -22,8 +22,8 @@ const TestimonialCard = ({ image, name, role, rating, content, className }) => {
           />
         </div>
         <div className="flex flex-col">
-          <h4 className="text-[18px] font-bold text-[#1A1A1A] leading-tight">{name}</h4>
-          <p className="text-[14px] text-gray-500 font-medium italic">{role}</p>
+          <h4 className="lg:text-[18px] xl:text-[19px] 2xl:text-[20px] font-semibold text-[#1A1A1A] leading-tight m-0">{name}</h4>
+          <p className="lg:text-[14px] xl:text-[15px] 2xl:text-[16px] text-[#1A1A1A] font-medium">{role}</p>
         </div>
       </div>
 
@@ -33,21 +33,21 @@ const TestimonialCard = ({ image, name, role, rating, content, className }) => {
                   const fillLevel = Math.max(0, Math.min(1, rating - i));
                   return (
                     <div key={i} className="relative">
-                      <Star className="w-3.5 h-3.5 md:w-4 md:h-4 text-gray-200 fill-gray-200" />
+                      <Star className="w-3.5 h-3.5 md:w-4 md:h-4 xl:w-5 xl:h-5 text-gray-200 fill-gray-200" />
                       <div 
                         className="absolute inset-0 overflow-hidden" 
                         style={{ width: `${fillLevel * 100}%` }}
                       >
-                        <Star className="w-3.5 h-3.5 md:w-4 md:h-4 text-yellow-400 fill-yellow-400" />
+                        <Star className="w-3.5 h-3.5 md:w-4 md:h-4 xl:w-5 xl:h-5 text-yellow-400 fill-yellow-400" />
                       </div>
                     </div>
                   );
                 })}
               </div>
-        <span className="text-[15px] font-bold text-[#1A1A1A]">{rating}</span>
+        <span className="text-[15px] font-semibold text-[#1A1A1A]">{rating}</span>
       </div>
 
-      <p className="text-[15px] text-[#4A4A4A] leading-relaxed line-clamp-4">
+      <p className="lg:text-[15px] xl:text-[16px] text-[#1A1A1A] leading-relaxed line-clamp-4">
         &quot;{content}&quot;
       </p>
     </div>
