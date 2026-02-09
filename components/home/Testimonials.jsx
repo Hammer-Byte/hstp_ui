@@ -7,18 +7,19 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { SKILLS_DATA } from "@/app/utils/skillCarouselList";
-import SkillCarouselCard from "./SkillCarouselCard";
+import { TESTIMONIALS_DATA } from "@/app/(app)/constant";
+import TestimonialCard from "@/components/shared/TestimonialCard";
+
 const NavBtn = ({ icon: Icon, onClick }) => (
   <button
     onClick={onClick}
-    className="hover:opacity-50 transition-all active:scale-90"
+    className="hover:opacity-50 transition-all active:scale-90 cursor-pointer"
   >
-    <Icon className="w-10 h-10 stroke-[1.2px]" />
+    <Icon className="w-8 h-8 stroke-[1.5px]" />
   </button>
 );
 
-export default function Carousels() {
+export default function Testimonials() {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(0);
 
@@ -28,24 +29,23 @@ export default function Carousels() {
   }, [api]);
 
   return (
-    <section className="m-0">
-      <h2 className="font-semibold text-center">
-        Learn Skills{" "}
-        <span className="text-(--color-brand-primary)">That Matter</span>
+    <section className="w-full flex flex-col gap-4">
+      <h2 className="text-text-main">
+        Testimonials & <span className="text-primary">Success Stories</span>
       </h2>
 
       <Carousel
         setApi={setApi}
         opts={{ align: "start", loop: true }}
-        className="w-full max-w-[1440px] mx-auto"
+        className="w-full"
       >
-        <CarouselContent className="-ml-4 ">
-          {SKILLS_DATA.map((item, i) => (
+        <CarouselContent className="-ml-6">
+          {TESTIMONIALS_DATA.map((item, i) => (
             <CarouselItem
               key={i}
-              className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
+              className="pl-6 basis-auto"
             >
-              <SkillCarouselCard item={item} />
+              <TestimonialCard {...item} />
             </CarouselItem>
           ))}
         </CarouselContent>

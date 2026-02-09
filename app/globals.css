@@ -147,7 +147,7 @@
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
+  --breakpoint-xl: 1300px;
   --breakpoint-2xl: 1536px;
 
   --container-center: true;
@@ -155,6 +155,7 @@
 
   --color-brand-primary: #673AB7;
   --color-brand-secondary: #512DA8;
+  --color-dark-brand: #2E1A51;  
   --color-brand-main: var(--color-brand-primary);
 
   --color-text-main: #212121;
