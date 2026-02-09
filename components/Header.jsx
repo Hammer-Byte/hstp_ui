@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Search, ShoppingBag, Globe, ChevronDown, Menu } from 'lucide-react';
+import { Search, ShoppingBag, Globe, ChevronDown, Menu, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { usePathname } from 'next/navigation';
@@ -14,10 +14,28 @@ import {
   DrawerTrigger,
   DrawerFooter,
 } from "@/components/ui/drawer";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { COURSE_DATA, CATEGORIES } from '@/app/(app)/constant';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const isAuthPage = pathname === '/login' || pathname === '/register';
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  const filteredCourses = COURSE_DATA.filter(course => 
+    course.title.toLowerCase().includes(searchQuery.toLowerCase())
+  ).slice(0, 5);
+
+  const categories = CATEGORIES;
   return (
     <header className="sticky top-0 z-50 w-full h-16 border-b bg-[#FAFAFA] backdrop-blur-none shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,15 +54,35 @@ export default function Header() {
                     <DrawerTitle className="text-left">Navigation</DrawerTitle>
                   </DrawerHeader>
                   <div className="flex flex-col p-4 space-y-4">
-                    <div className="space-y-2">
-                       <p className="text-[10px] font-bold text-text-shaded uppercase tracking-wider mb-2">Main Menu</p>
-                       <Link href="/categories" className="flex items-center py-2 text-base font-medium text-text-main hover:text-primary transition-colors">
-                        Explore Categories
-                      </Link>
-                      <Link href="/certifications" className="flex items-center py-2 text-base font-medium text-text-main hover:text-primary transition-colors">
+                    <div className="space-y-1">
+                       {/* <p className="text-[10px] font-bold text-text-shaded uppercase tracking-wider mb-2">Main Menu</p> */}
+                       
+                       {/* Mobile Categories Accordion */}
+                       <Accordion type="single" collapsible className="w-full border-none">
+                         <AccordionItem value="categories" className="border-none">
+                           <AccordionTrigger className="flex items-center py-3 text-base font-medium text-text-main hover:text-primary transition-colors hover:no-underline">
+                             Explore Categories
+                           </AccordionTrigger>
+                           <AccordionContent className="pb-2">
+                             <div className="flex flex-col pl-4 space-y-1 border-l-2 border-gray-100 ml-1">
+                               {categories.map((category, index) => (
+                                 <Link
+                                   key={index}
+                                   href={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                                   className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                                 >
+                                   {category}
+                                 </Link>
+                               ))}
+                             </div>
+                           </AccordionContent>
+                         </AccordionItem>
+                       </Accordion>
+
+                       <Link href="/certifications" className="flex items-center py-3 text-base font-medium text-text-main hover:text-primary transition-colors">
                         Certifications
                       </Link>
-                      <Link href="/about" className="flex items-center py-2 text-base font-medium text-text-main hover:text-primary transition-colors">
+                      <Link href="/about" className="flex items-center py-3 text-base font-medium text-text-main hover:text-primary transition-colors">
                         About
                       </Link>
                     </div>
@@ -52,10 +90,17 @@ export default function Header() {
                     {!isAuthPage && (
                       <div className="pt-4 border-t border-gray-100 flex flex-col gap-2">
                          <p className="text-[10px] font-bold text-text-shaded uppercase tracking-wider mb-2">Account</p>
-                        <Button variant="outline" className="w-full rounded-full border-primary text-primary hover:bg-primary/5">
+                        <Button 
+                          variant="outline" 
+                          className="w-full rounded-full border-primary text-primary hover:bg-primary/5"
+                          onClick={() => router.push('/register')}
+                        >
                           Sign-Up
                         </Button>
-                        <Button className="w-full rounded-full bg-primary hover:bg-primary/90">
+                        <Button 
+                          className="w-full rounded-full bg-primary hover:bg-primary/90"
+                          onClick={() => router.push('/login')}
+                        >
                           Sign-In
                         </Button>
                       </div>
@@ -82,23 +127,91 @@ export default function Header() {
 
             {/* Search Bar - Hidden on small screens, expands on lg */}
             <div className="hidden sm:flex items-center px-1 md:px-2 flex-1 md:flex-none">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <div className="relative w-full group">
+                <Search className={`absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transition-colors ${isSearchFocused ? 'text-primary' : 'text-muted-foreground'}`} />
                 <Input
                   type="search"
                   placeholder="Search learning"
-                  className="pl-9 bg-[#F0F2F5] border-transparent focus:border-primary h-9 md:h-10 rounded-full w-full md:w-[250px] lg:w-[350px] transition-all"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                  className="pl-9 bg-[#F0F2F5] border-transparent focus:border-primary focus:bg-white h-9 md:h-10 rounded-full w-full md:w-[250px] lg:w-[350px] transition-all"
                 />
+
+                {/* Search Results Dropdown */}
+                {isSearchFocused && (searchQuery || filteredCourses.length > 0) && (
+                  <div className="absolute top-full left-0 mt-2 w-full md:w-[350px] lg:w-[450px] bg-white border border-gray-100 shadow-2xl rounded-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="p-2">
+                      {filteredCourses.length > 0 ? (
+                        <>
+                          <p className="text-[10px] font-bold text-text-shaded uppercase tracking-wider px-3 py-2">Suggested Courses</p>
+                          {filteredCourses.map((course, index) => (
+                            <button
+                              key={index}
+                              onClick={() => {
+                                router.push(`/course-detail`);
+                                setSearchQuery('');
+                              }}
+                              className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 rounded-lg group transition-colors text-left"
+                            >
+                              <div className="h-10 w-10 rounded bg-gray-100 overflow-hidden shrink-0">
+                                <img src={course.image} alt={course.title} className="h-full w-full object-cover" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h4 className="text-sm font-medium text-gray-900 truncate group-hover:text-primary transition-colors">{course.title}</h4>
+                                <p className="text-xs text-gray-500 truncate">Course • {course.author}</p>
+                              </div>
+                              <ArrowRight className="h-4 w-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                            </button>
+                          ))}
+                        </>
+                      ) : (
+                        <div className="px-4 py-8 text-center">
+                          <p className="text-sm text-gray-500">No results found for &quot;{searchQuery}&quot;</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Center: Navigation Links - Visible on xl+ */}
           <nav className="hidden items-center space-x-6 text-sm font-medium xl:flex">
-            <Link href="/categories" className="transition-colors hover:text-primary relative group whitespace-nowrap">
-              Explore Categories
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            </Link>
+            {/* Explore Categories Dropdown */}
+            <div 
+              className="relative py-4 hover:text-primary cursor-pointer"
+              onMouseEnter={() => setIsMenuOpen(true)}
+              onMouseLeave={() => setIsMenuOpen(false)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <div 
+                className="flex items-center gap-1 transition-colors hover:text-primary relative whitespace-nowrap cursor-pointer select-none"
+              >
+                Explore Categories
+                <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isMenuOpen ? "rotate-180 text-primary" : ""}`} />
+              </div>
+              
+              {/* Dropdown Menu */}
+              <div className={`absolute top-full left-0 w-[320px] bg-white border border-gray-100 shadow-2xl rounded-xl overflow-hidden transition-all duration-300 z-60 
+                ${isMenuOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2"}`}>
+                <div className="py-2">
+                  {categories.map((category, index) => (
+                    <Link
+                      key={index}
+                      href={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="flex items-center justify-between px-6 py-3.5 hover:bg-gray-50 group transition-colors border-b border-gray-50 last:border-0"
+                    >
+                      <span className="text-sm font-medium text-gray-700 group-hover:text-primary transition-colors">
+                        {category}
+                      </span>
+                      <ArrowRight className="h-4 w-4 text-gray-400 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-primary" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
             <Link href="/certifications" className="transition-colors hover:text-primary relative group whitespace-nowrap">
               Certifications
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
@@ -120,10 +233,19 @@ export default function Header() {
               <ShoppingBag className="h-5 w-5" />
             </button>
             <div className="hidden items-center space-x-2 md:flex">
-              {!isAuthPage && <Button variant="outline" className="rounded-full px-4 xl:px-6 border-primary text-primary hover:bg-primary/5 transition-all text-sm h-9 xl:h-10">
+              {!isAuthPage && 
+              <Button 
+              variant="outline" 
+              className="rounded-full px-4 xl:px-6 border-primary text-primary hover:bg-primary/5 transition-all text-sm h-9 xl:h-10"
+              onClick={() => router.push('/register')}
+              >
                 Sign-Up
               </Button>}
-              {!isAuthPage && <Button className="rounded-full px-4 xl:px-6 bg-primary hover:bg-primary/90 transition-all text-sm h-9 xl:h-10">
+              {!isAuthPage && 
+              <Button 
+                className="rounded-full px-4 xl:px-6 bg-primary hover:bg-primary/90 transition-all text-sm h-9 xl:h-10"
+                onClick={() => router.push('/login')}
+              >
                 Sign-In
               </Button>}
             </div>
