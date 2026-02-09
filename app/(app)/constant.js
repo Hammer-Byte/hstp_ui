@@ -1,4 +1,4 @@
-export const courseData = [
+export const COURSE_DATA = [
     {
         title: "Front Desk Operations & PMS Basics",
         author: "hammerbyte",
@@ -103,4 +103,16 @@ export const TESTIMONIALS_DATA = [
         content: "The training helped me handle guests more confidently at the front desk.",
         image: "/course_preview_placeholder.png"
     },
+];
+
+export const CATEGORIES = [
+    "Front Office Management",
+    "Housekeeping Management",
+    "Food & Beverage Management",
+    "Hotel Operations Management",
+    "Hospitality Sales & Marketing",
+    "Revenue Management",
+    "Event & Banquet Management",
+    "Safety, Security & Compliance",
+    "Hospitality Technology Systems",
 ];
