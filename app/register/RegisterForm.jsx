@@ -43,7 +43,7 @@ export default function RegisterForm({ loading, onRegister }) {
   };
 
   return (
-    <div className="flex flex-col justify-center px-4 py-8 lg:px-24 bg-background">
+    <div className="flex flex-col justify-center px-4 lg:px-24 bg-background">
       <div className="mx-auto w-full max-w-md space-y-10">
         <div className="text-center m-0">
           <h1 className="text-3xl font-bold tracking-tight text-foreground mb-[14px]">
