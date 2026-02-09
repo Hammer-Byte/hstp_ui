@@ -19,7 +19,7 @@ export default function Header() {
   const pathname = usePathname();
   const isAuthPage = pathname === '/login' || pathname === '/register';
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-[#FAFAFA] backdrop-blur-none shadow-sm">
+    <header className="sticky top-0 z-50 w-full h-16 border-b bg-[#FAFAFA] backdrop-blur-none shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-2 md:gap-5 flex-1 md:flex-none">
