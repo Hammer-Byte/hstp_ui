@@ -6,7 +6,7 @@ export const COURSE_DATA = [
         reviewsCount: 402,
         price: "365",
         badgeText: "Popular",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
     {
         title: "Advanced Data Analytics with Python",
@@ -15,7 +15,7 @@ export const COURSE_DATA = [
         reviewsCount: 120,
         price: "499",
         badgeText: "Best Seller",
-        image: "/course_preview_placeholder.png",
+        image: "/sample-course.png",
         isSelected: true
     },
     {
@@ -25,7 +25,7 @@ export const COURSE_DATA = [
         reviewsCount: 85,
         price: "299",
         badgeText: "New",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
     {
         title: "Marketing in Hospitality",
@@ -34,7 +34,7 @@ export const COURSE_DATA = [
         reviewsCount: 156,
         price: "349",
         badgeText: "Popular",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
     {
         title: "Medical Ethics for Doctors",
@@ -43,7 +43,7 @@ export const COURSE_DATA = [
         reviewsCount: 230,
         price: "599",
         badgeText: "Elite",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
     {
         title: "Emergency Response Training",
@@ -52,7 +52,7 @@ export const COURSE_DATA = [
         reviewsCount: 89,
         price: "420",
         badgeText: "Critical",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     }
 ];
 
@@ -66,12 +66,12 @@ export const SYSTEM_DATA = [
 ];
 
 export const POPULAR_SKILLS = [
-    { title: "Guest Service Excellence", image: "/course_preview_placeholder.png" },
-    { title: "Front Desk Handling", image: "/course_preview_placeholder.png" },
-    { title: "Housekeeping Standards", image: "/course_preview_placeholder.png" },
-    { title: "Food Safety & Hygiene", image: "/course_preview_placeholder.png" },
-    { title: "Beverage Knowledge", image: "/course_preview_placeholder.png" },
-    { title: "Team Management", image: "/course_preview_placeholder.png" },
+    { title: "Guest Service Excellence", image: "/sample-course.png" },
+    { title: "Front Desk Handling", image: "/sample-course.png" },
+    { title: "Housekeeping Standards", image: "/sample-course.png" },
+    { title: "Food Safety & Hygiene", image: "/sample-course.png" },
+    { title: "Beverage Knowledge", image: "/sample-course.png" },
+    { title: "Team Management", image: "/sample-course.png" },
 ];
 
 export const TESTIMONIALS_DATA = [
@@ -80,39 +80,39 @@ export const TESTIMONIALS_DATA = [
         role: "Hotel Manager",
         rating: 4.6,
         content: "The training helped me handle guests more confidently at the front desk.",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
     {
         name: "Hina khan",
         role: "Hotel Manager",
         rating: 4.6,
         content: "The training helped me handle guests more confidently at the front desk.",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
     {
         name: "Hina khan",
         role: "Hotel Manager",
         rating: 4.6,
         content: "The training helped me handle guests more confidently at the front desk.",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
     {
         name: "Hina khan",
         role: "Hotel Manager",
         rating: 4.6,
         content: "The training helped me handle guests more confidently at the front desk.",
-        image: "/course_preview_placeholder.png"
+        image: "/sample-course.png"
     },
 ];
 
 export const CATEGORIES = [
     "Front Office Management",
     "Housekeeping Management",
-    "Food & Beverage Management",
+    "Food and Beverage Management",
     "Hotel Operations Management",
-    "Hospitality Sales & Marketing",
+    "Hospitality Sales and Marketing",
     "Revenue Management",
-    "Event & Banquet Management",
-    "Safety, Security & Compliance",
+    "Event and Banquet Management",
+    "Safety, Security and Compliance",
     "Hospitality Technology Systems",
 ];
