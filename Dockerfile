@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy package files first to leverage Docker layer caching
 # This prevents re-running npm install on every code change
-COPY package.json package-lock.json* ./
+COPY package.json ./
 
 # Install dependencies
 RUN npm install
