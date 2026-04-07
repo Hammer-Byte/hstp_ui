@@ -33,7 +33,6 @@ export default function Carousels() {
     refetchOnWindowFocus: false, 
     refetchOnMount: false,
   });
-  console.log("categories from skills", categories)
 
   useEffect(() => {
     if (!api) return;
@@ -54,6 +53,7 @@ export default function Carousels() {
         title: cat.description || ("Everything about " + cat.title),
         tag: cat.title,
         image: getImageUrl(cat.image),
+        id: cat.id,
       }))
     : [];
 
@@ -70,7 +70,7 @@ export default function Carousels() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
              {[...Array(4)].map((_, i) => <SkillCarouselCardSkeleton key={i} />)}
           </div>
-        ) : error ? (
+        ) : error && skillsData.length === 0 ? (
             <div className="text-center py-20 text-red-500 bg-red-50 rounded-3xl border border-red-200">
                 <p className="font-medium">Failed to load categories.</p>
                 <p className="text-sm opacity-70">Please ensure the backend server is running.</p>

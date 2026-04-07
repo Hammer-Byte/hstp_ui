@@ -1,17 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import CategoryCourseCard from '@/components/shared/CategoryCourseCard';
+import CategoryCourseCardSkeleton from '@/components/shared/CategoryCourseCardSkeleton';
+import { Skeleton } from '@/components/shared/Skeleton';
 import { COURSE_DATA } from '@/app/(app)/constant';
-import CourseCard from '@/components/shared/CourseCard';
 import { ChevronLeft, ChevronRight, Star, Users, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import CategoryCourseCard from '../../../components/shared/CategoryCourseCard';
 
 export default function CategoryPage() {
-  const { name } = useParams();
-  const categoryName = name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-  console.log(categoryName);
+  const { id } = useParams();
+  const categoryName = id;
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    // Simulate API fetch with a timer
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    
+    return () => clearTimeout(timer);
+  }, []);
   
   // Simulation of more data for pagination
   const allCourses = [...COURSE_DATA, ...COURSE_DATA, ...COURSE_DATA, ...COURSE_DATA].map(course => ({
@@ -32,6 +42,48 @@ export default function CategoryPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setCurrentPage(pageNumber);
 };
+
+  if (isLoading) {
+    return (
+      <div className="bg-white min-h-screen pb-20 pt-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
+          <div className="mb-16">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+              <div className="flex-1 space-y-6">
+                <div className="space-y-4">
+                  <Skeleton className="h-12 w-1/3" />
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
+                
+                <div className="flex items-center gap-2 mt-4">
+                   <Skeleton className="h-4 w-32" />
+                   <Skeleton className="h-4 w-12" />
+                </div>
+
+                <div className="flex items-center gap-12 pt-4">
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-24" />
+                    <Skeleton className="h-8 w-32" />
+                  </div>
+                  <div className="h-10 w-[1.5px] bg-gray-100" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-24" />
+                    <Skeleton className="h-8 w-32" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-10 lg:gap-x-8 lg:gap-y-12 2xl:gap-x-10 xl:gap-y-16">
+            {[...Array(8)].map((_, index) => (
+              <CategoryCourseCardSkeleton key={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white min-h-screen pb-20 pt-10">

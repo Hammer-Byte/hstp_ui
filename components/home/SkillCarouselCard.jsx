@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { ChevronRight } from "lucide-react";
 import { getImageUrl } from "@/lib/utils";
+import Link from "next/link";
 
 export default function CarouselCard({ item }) {
   return (
@@ -23,9 +24,13 @@ export default function CarouselCard({ item }) {
         <span className="bg-foreground flex items-center justify-center text-white rounded-full lg:w-45 xl:w-47 2xl:w-50 h-9 lg:h-10 xl:h-11 2xl:h-12 text-[13px] md:text-[14px] lg:text-[13px] xl:text-[14px] 2xl:text-[16px] px-4 overflow-hidden">
           <span className="truncate">{item.tag}</span>
         </span>
-        <button className="2xl:w-12 2xl:h-12 xl:h-11 xl:w-11 lg:h-10 lg:w-10 w-10 h-10 shrink-0 flex items-center justify-center border-3 border-black rounded-full hover:bg-black hover:text-white transition-colors">
-          <ChevronRight className="w-6 h-6" strokeWidth={2.5} />
-        </button>
+           <Link
+             key={item.id}
+             href={`/category/${item.id}`}
+             className="2xl:w-12 2xl:h-12 xl:h-11 xl:w-11 lg:h-10 lg:w-10 w-10 h-10 shrink-0 flex items-center justify-center border-3 border-black rounded-full hover:bg-black hover:text-white transition-colors cursor-pointer"
+           >
+             <ChevronRight className="w-6 h-6" strokeWidth={2.5} />
+           </Link>
       </div>
     </div>
   );

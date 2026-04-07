@@ -18,6 +18,21 @@ const categoryService = {
       console.error("Failed to fetch categories:", error);
       throw error;
     }
+  },
+
+  /**
+   * Get all courses for a specific category
+   * @param {string|number} id - The category ID
+   * @returns {Promise}
+   */
+  getCategoryCourses: async (id) => {
+    try {
+      const data = await apiClient.get(`/category/${id}/courses`);
+      return data;
+    } catch (error) {
+      console.error(`Failed to fetch courses for category ${id}:`, error);
+      throw error;
+    }
   }
 };
 
