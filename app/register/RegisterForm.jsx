@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/incompatible-library */
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -24,7 +23,7 @@ export default function RegisterForm({ loading, onRegister }) {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(registerSchema),
@@ -36,7 +35,10 @@ export default function RegisterForm({ loading, onRegister }) {
     },
   });
 
-  const termsValue = watch("terms");
+  const termsValue = useWatch({
+    control,
+    name: "terms",
+  });
 
   const onSubmit = (data) => {
     onRegister(data);

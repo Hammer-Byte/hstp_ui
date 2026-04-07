@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import React, { useState } from 'react';
@@ -22,6 +23,8 @@ import {
 } from "@/components/ui/accordion";
 import { COURSE_DATA, CATEGORIES } from '@/app/(app)/constant';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import categoryService from '@/services/categoryService';
 
 export default function Header() {
   const pathname = usePathname();
@@ -31,11 +34,26 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
+  // Dynamic API categories
+  const { data: apiCategories } = useQuery({
+    queryKey: ['course-categories'],
+    queryFn: () => categoryService.getCategories(),
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnWindowFocus: false, // Prevents refetching when switching tabs
+    refetchOnMount: false, // Relies on the hydration data for initial load
+  });
+  console.log("categories from header", apiCategories)
+
+  // Use API data if available, otherwise fallback to static constants
+  const categoriesList = apiCategories?.length > 0 
+    ? apiCategories.map(cat => cat.title)
+    : CATEGORIES;
+
   const filteredCourses = COURSE_DATA.filter(course => 
     course.title.toLowerCase().includes(searchQuery.toLowerCase())
   ).slice(0, 5);
 
-  const categories = CATEGORIES;
+  const categories = categoriesList;
   return (
     <header className="sticky top-0 z-50 w-full h-16 border-b bg-[#FAFAFA] backdrop-blur-none shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -250,10 +268,10 @@ export default function Header() {
               </Button>}
             </div>
             {/* Language Picker - Hidden on lg below? Let's keep it but maybe hide on small mobile */}
-            <button className="hidden sm:flex items-center space-x-1 p-2 transition-colors hover:text-primary shrink-0">
+            {/* <button className="hidden sm:flex items-center space-x-1 p-2 transition-colors hover:text-primary shrink-0">
               <Globe className="h-5 w-5" />
               <ChevronDown className="h-4 w-4" />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
