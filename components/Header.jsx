@@ -42,12 +42,11 @@ export default function Header() {
     refetchOnWindowFocus: false, // Prevents refetching when switching tabs
     refetchOnMount: false, // Relies on the hydration data for initial load
   });
-  console.log("categories from header", apiCategories)
 
-  // Use API data if available, otherwise fallback to static constants
+  // Use API data if available, otherwise fallback to an empty array
   const categoriesList = apiCategories?.length > 0 
-    ? apiCategories.map(cat => cat.title)
-    : CATEGORIES;
+    ? apiCategories
+    : [];
 
   const filteredCourses = COURSE_DATA.filter(course => 
     course.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -85,11 +84,11 @@ export default function Header() {
                              <div className="flex flex-col pl-4 space-y-1 border-l-2 border-gray-100 ml-1">
                                {categories.map((category, index) => (
                                  <Link
-                                   key={index}
-                                   href={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                                   key={category.id || index}
+                                   href={`/category/${category.id}`}
                                    className="py-2.5 text-sm font-medium text-gray-600 hover:text-primary transition-colors"
                                  >
-                                   {category}
+                                   {category.title}
                                  </Link>
                                ))}
                              </div>
@@ -217,16 +216,21 @@ export default function Header() {
                 <div className="py-2">
                   {categories.map((category, index) => (
                     <Link
-                      key={index}
-                      href={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                      key={category.id || index}
+                      href={`/category/${category.id}`}
                       className="flex items-center justify-between px-6 py-3.5 hover:bg-gray-50 group transition-colors border-b border-gray-50 last:border-0"
                     >
                       <span className="text-sm font-medium text-gray-700 group-hover:text-primary transition-colors">
-                        {category}
+                        {category.title}
                       </span>
                       <ArrowRight className="h-4 w-4 text-gray-400 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-primary" />
                     </Link>
                   ))}
+                  {categories.length === 0 && (
+                    <div className="px-6 py-8 text-center">
+                      <p className="text-sm text-gray-500 italic">No categories available</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

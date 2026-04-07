@@ -33,8 +33,8 @@ export default async function Home() {
           />
           <IndustryExperts />
           <SkillBasedCourses />
-          <SystemCarousels />
-          <HomeSkillCarousel />
+          {/* <SystemCarousels /> */}
+          {/* <HomeSkillCarousel /> */}
           <Testimonials />
         </div>
       </div>
