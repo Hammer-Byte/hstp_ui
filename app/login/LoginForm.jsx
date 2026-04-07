@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/incompatible-library */
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -9,25 +8,23 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
   terms: z.boolean().optional(),
-  // terms: z.boolean().refine((val) => val === true, {
-  //   message: "You must agree to the terms and conditions",
-  // }),
-  
 });
 
-export default function LoginForm({ loading, onLogin }) {
+export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const { login, isLoginLoading, loginError } = useAuth();
 
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
@@ -38,11 +35,14 @@ export default function LoginForm({ loading, onLogin }) {
     },
   });
 
-  const termsValue = watch("terms");
+  const termsValue = useWatch({
+    control,
+    name: "terms",
+  });
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    onLogin(data);
+    // Calling the centralized API mutation
+    login(data);
   };
 
   return (
@@ -120,14 +120,21 @@ export default function LoginForm({ loading, onLogin }) {
             )} */}
           </div>
 
+          {/* ERROR MESSAGE */}
+          {loginError && (
+            <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm font-medium text-center">
+              {loginError.message}
+            </div>
+          )}
+
           {/* BUTTONS */}
           <div className="space-y-4 pt-4">
             <Button
               type="submit"
-              disabled={loading}
+              disabled={isLoginLoading}
               className="w-full h-14 rounded-2xl bg-primary text-white text-lg font-semibold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all active:scale-[0.98]"
             >
-              {loading ? "Logging in..." : "Continue"}
+              {isLoginLoading ? "Logging in..." : "Continue"}
             </Button>
 
             <Link href="/register" className="block w-full">

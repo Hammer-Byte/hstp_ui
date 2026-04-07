@@ -57,13 +57,13 @@ const PopularCourses = ({ title, highlight, items = [], className }) => {
           <div className="relative border-b border-gray-200">
             <TabsList 
               ref={tabsListRef} 
-              className="bg-transparent pb-[3px] gap-8 md:gap-12 h-auto border-none flex-nowrap justify-start leading-none overflow-x-auto no-scrollbar"
+              className="bg-transparent pb-[4px] gap-8 md:gap-12 h-auto border-none flex-nowrap justify-start leading-none overflow-x-auto no-scrollbar"
             >
               {categories.map((cat) => (
                 <TabsTrigger
                   key={cat}
                   value={cat}
-                  className="rounded-none border-none bg-transparent data-[state=active]:shadow-none data-[state=active]:text-text-main px-0 py-3.5 text-base md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-medium text-[#808080] transition-colors hover:text-text-main z-10 leading-none after:hidden shrink-0 cursor-pointer"
+                  className="rounded-none border-none bg-transparent data-[state=active]:shadow-none data-[state=active]:text-text-main px-0 py-3.5 text-base md:text-md lg:text-lg xl:text-lg 2xl:text-xl font-medium text-[#808080] transition-colors hover:text-text-main z-10 leading-none after:hidden shrink-0 cursor-pointer shadow-none"
                 >
                   {cat}
                 </TabsTrigger>

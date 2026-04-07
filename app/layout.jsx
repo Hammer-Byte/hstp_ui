@@ -4,6 +4,7 @@ import ReduxProvider from "../components/redux-provider";
 import { ThemeProvider } from "../components/theme-provider";
 import ThemeSync from "../components/theme-sync";
 import ClientLayout from "./(app)/components/ClientLayout";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 /**
  * Global font configuration
@@ -32,20 +33,22 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={fontClasses}>
         <ReduxProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem={false}
-          >
-            <ThemeSync />
-            <div className="flex min-h-screen flex-col">
-              <ClientLayout>
-                <main className="flex-1 bg-background">
-                  {children}
-                </main>
-              </ClientLayout>
-            </div>
-          </ThemeProvider>
+          <QueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem={false}
+            >
+              <ThemeSync />
+              <div className="flex min-h-screen flex-col">
+                <ClientLayout>
+                  <main className="flex-1 bg-background">
+                    {children}
+                  </main>
+                </ClientLayout>
+              </div>
+            </ThemeProvider>
+          </QueryProvider>
         </ReduxProvider>
       </body>
     </html>
