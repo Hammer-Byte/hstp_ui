@@ -12,7 +12,7 @@ export default function Hero() {
       <div className="absolute right-0 bottom-0 h-full w-[50%] lg:w-[55%] xl:w-[60%] -mr-22 lg:-mr-25 pointer-events-none select-none">
         <Image
           src="/hero-sec-image.png"
-          alt="Hero Section Illustration"
+          alt="Hero Section Illustration."
           fill
           sizes="60vw"
           className="object-contain object-bottom-right scale-90 md:scale-125 lg:scale-112  pr-15 origin-bottom-right"
