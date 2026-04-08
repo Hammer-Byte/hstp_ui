@@ -10,7 +10,6 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = useCallback((data) => {
-    console.log("Registration attempt:", data);
     setLoading(true);
   }, []);
 

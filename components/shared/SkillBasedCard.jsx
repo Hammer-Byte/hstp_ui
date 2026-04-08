@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Star, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getImageUrl } from "@/lib/utils";
 
 const SkillBasedCard = ({ title, rating, badge, personImage, className }) => {
   return (
@@ -14,7 +14,7 @@ const SkillBasedCard = ({ title, rating, badge, personImage, className }) => {
       {/* Top Section - Simple Full-bleed Image */}
       <div className="relative w-full aspect-16/10 shrink-0">
         <Image
-          src={personImage || "/sample-course.png"}
+          src={getImageUrl(personImage) || "/sample-course.png"}
           alt={title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"

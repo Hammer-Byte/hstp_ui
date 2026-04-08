@@ -5,17 +5,18 @@ import Image from "next/image";
 import { Star, Heart, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, getImageUrl } from "@/lib/utils";
 
 const CategoryCourseCard = ({ 
   image, 
   title, 
   author, 
-  rating = 0, 
-  reviewsCount = 0, 
+  rating, 
+  reviewsCount, 
   price, 
-  originalPrice = "999",
+  originalPrice,
   badgeText,
+  tags = [],
   isWishlisted = false,
   isSelected = false,
   showWishlist = true,
@@ -30,7 +31,7 @@ const CategoryCourseCard = ({
       {/* Image Section */}
       <div className="relative aspect-16/10 w-full rounded-[12px] overflow-hidden shrink-0">
         <Image
-          src={image || "/sample-course.png"}
+          src={getImageUrl(image)}
           alt={title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -52,42 +53,54 @@ const CategoryCourseCard = ({
           <h3 className="text-[18px] md:text-[20px] lg:text-[22px] 2xl:text-[24px] font-semibold text-[#1A1A1A] leading-tight line-clamp-2 min-h-[52px]">
             {title}
           </h3>
-          <p className="text-[11px] md:text-[12px] lg:text-[13px] xl:text-[13px] 2xl:text-[14px] text-[#5F5F5F] font-semibold">by {author}</p>
+          {author && (
+            <p className="text-[11px] md:text-[12px] lg:text-[13px] xl:text-[13px] 2xl:text-[14px] text-[#5F5F5F] font-semibold">by {author}</p>
+          )}
         </div>
 
         {/* Rating & reviews count */}
-        <div className="flex items-center gap-1.5">
-          <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <Star 
-                key={i} 
-                className={cn(
-                  "w-3.5 h-3.5 2xl:w-4 2xl:h-4",
-                  i < 4 // Matching the image which shows 4 stars
-                    ? "fill-[#FFC107] text-[#FFC107]" 
-                    : "fill-[#E0E0E0] text-[#E0E0E0]"
-                )} 
-              />
-            ))}
+        {reviewsCount > 0 && (
+          <div className="flex items-center gap-1.5">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star 
+                  key={i} 
+                  className={cn(
+                    "w-3.5 h-3.5 2xl:w-4 2xl:h-4",
+                    i < Math.floor(rating || 0)
+                      ? "fill-[#FFC107] text-[#FFC107]" 
+                      : "fill-[#E0E0E0] text-[#E0E0E0]"
+                  )} 
+                />
+              ))}
+            </div>
+            <span className="text-[11px] md:text-[11px] lg:text-[10px] xl:text-[11px] 2xl:text-[12px] font-medium text-black">({reviewsCount})</span>
           </div>
-          <span className="text-[11px] md:text-[11px] lg:text-[10px] xl:text-[11px] 2xl:text-[12px] font-medium text-black">({reviewsCount})</span>
-        </div>
+        )}
 
         {/* Badges Row */}
-        <div className="flex flex-wrap gap-2">
-          <Badge className="px-3 py-1 bg-[#E3D4FF] text-[#673AB7] text-[11px] md:text-[13px] lg:text-[13px] 2xl:text-[15px] font-semibold rounded-[4px] border-none hover:bg-[#E3D4FF]">
-            Best Seller
-          </Badge>
-          <Badge className="px-3 py-1 bg-[#FFF6A2] text-[#CBB300] text-[11px] md:text-[13px] lg:text-[13px] 2xl:text-[15px] font-semibold rounded-[4px] border-none hover:bg-[#FFF4B0]">
-            Popular
-          </Badge>
-        </div>
+        {(badgeText || (tags && tags.length > 0)) && (
+          <div className="flex flex-wrap gap-2">
+            {badgeText && (
+              <Badge className="px-3 py-1 bg-[#E3D4FF] text-[#673AB7] text-[11px] md:text-[13px] lg:text-[13px] 2xl:text-[15px] font-semibold rounded-[4px] border-none hover:bg-[#E3D4FF]">
+                {badgeText}
+              </Badge>
+            )}
+            {tags?.map((tag, index) => (
+              <Badge key={index} className="px-3 py-1 bg-[#FFF6A2] text-[#CBB300] text-[11px] md:text-[13px] lg:text-[13px] 2xl:text-[15px] font-semibold rounded-[4px] border-none hover:bg-[#FFF4B0]">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
 
         {/* Price Row */}
         <div className="flex items-baseline gap-2 pt-1">
-          <div className="text-[14px] md:text-[15px] lg:text-[16px] 2xl:text-[18px] text-[#9EA1A7] line-through font-semibold">
-            ₹ {originalPrice}/-
-          </div>
+          {originalPrice && (
+            <div className="text-[14px] md:text-[15px] lg:text-[16px] 2xl:text-[18px] text-[#9EA1A7] line-through font-semibold">
+              ₹ {originalPrice}/-
+            </div>
+          )}
           <div className="text-[18px] md:text-[20px] lg:text-[22px] 2xl:text-[24px] font-bold text-[#1A1A1A]">
             ₹ {price}/-
           </div>

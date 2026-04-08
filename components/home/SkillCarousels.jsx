@@ -21,7 +21,7 @@ const NavBtn = ({ icon: Icon, onClick }) => (
   </button>
 );
 
-export default function Carousels() {
+export default function Carousels({ initialData }) {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(0);
 
@@ -30,8 +30,7 @@ export default function Carousels() {
     queryKey: ["course-categories"],
     queryFn: () => categoryService.getCategories(),
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
-    refetchOnWindowFocus: false, 
-    refetchOnMount: false,
+    initialData, // Use prefetched data from server to avoid skeleton on load
   });
 
   useEffect(() => {
@@ -48,15 +47,27 @@ export default function Carousels() {
   }, [api]);
 
   // Map API data to the format expected by the card
-  const skillsData = categories?.length > 0 
-    ? categories.map(cat => ({
-        title: cat.description || ("Everything about " + cat.title),
-        tag: cat.title,
-        image: getImageUrl(cat.image),
-        id: cat.id,
-      }))
-    : [];
+  const skillsData = React.useMemo(() => {
+    if (!categories) return [];
+    
+    // The API might return the array directly or nested in a data property
+    // We handle several possible structures for maximum robustness
+    const list = Array.isArray(categories) 
+      ? categories 
+      : (categories.data || categories.categories || []);
+    
+    if (!Array.isArray(list)) return [];
 
+    return list.map(cat => ({
+      title: cat.name || cat.title || cat.description || "Untitled Skill",
+      tag: cat.title || cat.name || "Category",
+      image: cat.image, 
+      id: cat.id || cat.category_id,
+    }));
+  }, [categories]);
+
+  // Simplify skeleton logic to match other successful components in the app
+  const showSkeleton = isLoading;
 
   return (
     <section className="m-0">
@@ -66,35 +77,45 @@ export default function Carousels() {
       </h2>
 
       <div className="w-full max-w-[1440px] mx-auto px-4">
-        {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-             {[...Array(4)].map((_, i) => <SkillCarouselCardSkeleton key={i} />)}
-          </div>
-        ) : error && skillsData.length === 0 ? (
-            <div className="text-center py-20 text-red-500 bg-red-50 rounded-3xl border border-red-200">
-                <p className="font-medium">Failed to load categories.</p>
-                <p className="text-sm opacity-70">Please ensure the backend server is running.</p>
-            </div>
-        ) : skillsData.length === 0 ? (
-            <div className="text-center py-20 text-gray-500 bg-gray-50 rounded-3xl">
-                No categories found.
-            </div>
-        ) : (
-          <Carousel
-            setApi={setApi}
-            opts={{ align: "start", loop: skillsData.length > 4 }}
-          >
-            <CarouselContent className="-ml-4">
-              {skillsData.map((item, i) => (
+        <Carousel
+          setApi={setApi}
+          opts={{ align: "start", loop: skillsData.length > 4 }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {isLoading && skillsData.length === 0 ? (
+              [...Array(4)].map((_, i) => (
+                <CarouselItem
+                  key={`skeleton-${i}`}
+                  className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
+                >
+                  <SkillCarouselCardSkeleton />
+                </CarouselItem>
+              ))
+            ) : skillsData.length > 0 ? (
+              skillsData.map((item, i) => (
                 <CarouselItem
                   key={`skill-${i}`}
                   className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
                 >
                   <SkillCarouselCard item={item} />
                 </CarouselItem>
-              ))}
-            </CarouselContent>
+              ))
+            ) : error ? (
+              <div className="w-full pl-4 py-20 text-red-500 bg-red-50 rounded-3xl border border-red-200 text-center">
+                <p className="font-medium">Failed to load categories.</p>
+                <p className="text-sm opacity-70">
+                  Please ensure the backend server is running.
+                </p>
+              </div>
+            ) : (
+              <div className="w-full pl-4 py-20 text-gray-500 bg-gray-50 rounded-3xl text-center">
+                No categories found.
+              </div>
+            )}
+          </CarouselContent>
 
+          {skillsData.length > 0 && (
             <div className="flex items-center justify-end gap-6 mt-10 pr-4">
               <NavBtn icon={ChevronLeft} onClick={() => api?.scrollPrev()} />
               <div className="flex gap-2.5">
@@ -111,8 +132,8 @@ export default function Carousels() {
               </div>
               <NavBtn icon={ChevronRight} onClick={() => api?.scrollNext()} />
             </div>
-          </Carousel>
-        )}
+          )}
+        </Carousel>
       </div>
     </section>
   );

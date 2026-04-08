@@ -27,7 +27,7 @@ const categoryService = {
    */
   getCategoryCourses: async (id) => {
     try {
-      const data = await apiClient.get(`/category/${id}/courses`);
+      const data = await apiClient.get(ENDPOINTS.CATEGORY_COURSES(id));
       return data;
     } catch (error) {
       console.error(`Failed to fetch courses for category ${id}:`, error);

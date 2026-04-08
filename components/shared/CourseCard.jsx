@@ -5,14 +5,14 @@ import Image from "next/image";
 import { Star, Heart, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, getImageUrl } from "@/lib/utils";
 
 const CourseCard = ({ 
   image, 
   title, 
   author, 
-  rating = 0, 
-  reviewsCount = 0, 
+  rating, 
+  reviewsCount, 
   price, 
   badgeText,
   isWishlisted = false,
@@ -28,7 +28,7 @@ const CourseCard = ({
       {/* Image Section */}
       <div className="relative aspect-16/10 w-full rounded-[20px] overflow-hidden shrink-0">
         <Image
-          src={"/sample-course.png"}
+          src={getImageUrl(image) || "/sample-course.png"}
           alt={title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -48,29 +48,35 @@ const CourseCard = ({
           <h3 className="2xl:text-[22px] xl:text-[21px] lg:text-[20px] md:text-[18px] font-medium text-text-main leading-tight line-clamp-2 min-h-[50px]">
             {title}
           </h3>
-          <p className="2xl:text-[15px] xl:text-[14px] lg:text-[13px] md:text-[12px] text-text-shaded font-medium">by {author}</p>
+          {author && (
+            <p className="2xl:text-[15px] xl:text-[14px] lg:text-[13px] md:text-[12px] text-text-shaded font-medium">by {author}</p>
+          )}
         </div>
 
-        {/* Rating & Badge Row */}
-        <div className="flex items-center gap-2">
-          <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <Star 
-                key={i} 
-                className={cn(
-                  "2xl:w-4.5 2xl:h-4.5",
-                  i < Math.floor(rating) 
-                    ? "fill-yellow-400 text-yellow-400" 
-                    : "fill-gray-200 text-gray-200"
-                )} 
-              />
-            ))}
+        {/* Rating Row */}
+        {(rating > 0 || reviewsCount > 0) && (
+          <div className="flex items-center gap-2">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star 
+                  key={i} 
+                  className={cn(
+                    "2xl:w-4.5 2xl:h-4.5",
+                    i < Math.floor(rating || 0) 
+                      ? "fill-yellow-400 text-yellow-400" 
+                      : "fill-gray-200 text-gray-200"
+                  )} 
+                />
+              ))}
+            </div>
+            {reviewsCount > 0 && (
+              <div className="flex items-center gap-1 2xl:text-[14px] xl:text-[13px] lg:text-[12px] md:text-[11px] font-semibold text-text-shaded">
+                <Users className="2xl:w-4 2xl:h-4 xl:w-3.5 xl:h-3.5 lg:w-3 lg:h-3" />
+                <span>({reviewsCount})</span>
+              </div>
+            )}
           </div>
-          <div className="flex items-center gap-1 2xl:text-[14px] xl:text-[13px] lg:text-[12px] md:text-[11px] font-semibold text-text-shaded">
-            <Users className="2xl:w-4 2xl:h-4 xl:w-3.5 xl:h-3.5 lg:w-3 lg:h-3" />
-            <span>({reviewsCount})</span>
-          </div>
-        </div>
+        )}
 
         {/* Price & Badge Row */}
         <div className="flex items-center justify-between pt-2">

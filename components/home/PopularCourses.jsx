@@ -66,7 +66,7 @@ const EmptyState = () => (
   </div>
 );
 
-const PopularCourses = ({ title, highlight, items: itemsProp = [], className }) => {
+const PopularCourses = ({ title, highlight, items: itemsProp = [], className, initialData }) => {
   const [activeTab, setActiveTab] = React.useState("");
   const [indicatorStyle, setIndicatorStyle] = React.useState({ left: 0, width: 0 });
   const tabsListRef = React.useRef(null);
@@ -76,8 +76,9 @@ const PopularCourses = ({ title, highlight, items: itemsProp = [], className }) 
     queryKey: ["popular-categorized-courses"],
     queryFn: () => categoryService.getPopularCoursesByCategory(),
     staleTime: 5 * 60 * 1000, // 5 minutes
-  });
-  
+    initialData,
+  });  
+
   if (isError) {
     console.error('PopularCourses API ERROR:', error);
   }
@@ -125,6 +126,14 @@ const PopularCourses = ({ title, highlight, items: itemsProp = [], className }) 
           left: activeTrigger.offsetLeft,
           width: activeTrigger.offsetWidth,
         });
+
+        // Scroll active tab into view horizontally without moving the whole page
+        const container = tabsList;
+        const scrollLeft = activeTrigger.offsetLeft - (container.offsetWidth / 2) + (activeTrigger.offsetWidth / 2);
+        container.scrollTo({
+          left: scrollLeft,
+          behavior: "smooth"
+        });
       }
     };
 
@@ -145,15 +154,15 @@ const PopularCourses = ({ title, highlight, items: itemsProp = [], className }) 
         onValueChange={setActiveTab} 
         className="w-full"
       >
-        <div className="flex flex-col gap-4 mb-7">
-          <h2 className="text-[#1A1A1A]">
+        <div className="flex flex-col gap-4 mb-8">
+          <h2 className="text-[#1A1A1A] font-bold">
             {title} <span className="text-primary">{highlight}</span>
           </h2>
 
-          <div className="relative border-b border-gray-200">
+          <div className="relative border-b border-[#E5E5E5]">
             <TabsList 
               ref={tabsListRef} 
-              className="bg-transparent pb-[4px] gap-8 md:gap-12 h-auto border-none flex-nowrap justify-start leading-none overflow-x-auto no-scrollbar"
+              className="relative bg-transparent pb-0 gap-8 md:gap-10 h-auto border-none flex-nowrap justify-start leading-none overflow-x-auto no-scrollbar w-fit"
             >
               {isLoading ? (
                 // Render 4 tab skeletons while loading
@@ -167,7 +176,7 @@ const PopularCourses = ({ title, highlight, items: itemsProp = [], className }) 
                   <TabsTrigger
                     key={cat.id}
                     value={cat.id}
-                    className="rounded-none border-none bg-transparent data-[state=active]:shadow-none data-[state=active]:text-text-main px-0 py-3.5 text-base md:text-md lg:text-lg xl:text-lg 2xl:text-xl font-medium text-[#808080] transition-colors hover:text-text-main z-10 leading-none after:hidden shrink-0 cursor-pointer shadow-none"
+                    className="rounded-none border-none bg-transparent data-[state=active]:shadow-none data-[state=active]:text-[#1A1A1A] data-[state=active]:font-bold px-0 py-4 text-[16px] md:text-[18px] lg:text-[20px] font-medium text-[#808080] transition-colors hover:text-[#1A1A1A] z-10 leading-none after:hidden shrink-0 cursor-pointer shadow-none"
                   >
                     {cat.name}
                   </TabsTrigger>
@@ -175,7 +184,7 @@ const PopularCourses = ({ title, highlight, items: itemsProp = [], className }) 
               )}
               {!isLoading && (
                 <div 
-                  className="absolute bottom-0 h-[2px] bg-text-main transition-all duration-300 ease-in-out z-20"
+                  className="absolute bottom-0 h-[2px] bg-[#1A1A1A] transition-all duration-300 ease-in-out z-20"
                   style={indicatorStyle}
                 />
               )}

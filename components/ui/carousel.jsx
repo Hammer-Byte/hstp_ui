@@ -33,6 +33,11 @@ function Carousel({
   }, plugins)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const onSelect = React.useCallback((api) => {
     if (!api) return
@@ -86,6 +91,7 @@ function Carousel({
         scrollNext,
         canScrollPrev,
         canScrollNext,
+        mounted,
       }}>
       <div
         onKeyDownCapture={handleKeyDown}
@@ -93,6 +99,7 @@ function Carousel({
         role="region"
         aria-roledescription="carousel"
         data-slot="carousel"
+        suppressHydrationWarning
         {...props}>
         {children}
       </div>
@@ -148,7 +155,7 @@ function CarouselPrevious({
   size = "icon",
   ...props
 }) {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const { orientation, scrollPrev, canScrollPrev, mounted } = useCarousel()
 
   return (
     <Button
@@ -158,7 +165,7 @@ function CarouselPrevious({
       className={cn("absolute size-8 rounded-full", orientation === "horizontal"
         ? "top-1/2 -left-12 -translate-y-1/2"
         : "-top-12 left-1/2 -translate-x-1/2 rotate-90", className)}
-      disabled={!canScrollPrev}
+      disabled={!canScrollPrev || !mounted}
       onClick={scrollPrev}
       {...props}>
       <ArrowLeft />
@@ -173,7 +180,7 @@ function CarouselNext({
   size = "icon",
   ...props
 }) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const { orientation, scrollNext, canScrollNext, mounted } = useCarousel()
 
   return (
     <Button
@@ -183,7 +190,7 @@ function CarouselNext({
       className={cn("absolute size-8 rounded-full", orientation === "horizontal"
         ? "top-1/2 -right-12 -translate-y-1/2"
         : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90", className)}
-      disabled={!canScrollNext}
+      disabled={!canScrollNext || !mounted}
       onClick={scrollNext}
       {...props}>
       <ArrowRight />
