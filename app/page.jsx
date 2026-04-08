@@ -13,12 +13,18 @@ import categoryService from "@/services/categoryService";
 export default async function Home() {
   const queryClient = new QueryClient();
 
-  // Prefetching "categories" on the server
-  // This makes the page load with categories data already in the HTML (SSR)
-  await queryClient.prefetchQuery({
-    queryKey: ["course-categories"],
-    queryFn: () => categoryService.getCategories(),
-  });
+  // Prefetching all section-specific data on the server simultaneously
+  // This makes the page load with categories and popular courses data already in the HTML (SSR)
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["course-categories"],
+      queryFn: () => categoryService.getCategories(),
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["popular-categorized-courses"],
+      queryFn: () => categoryService.getPopularCoursesByCategory(),
+    }),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

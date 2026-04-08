@@ -33,6 +33,20 @@ const categoryService = {
       console.error(`Failed to fetch courses for category ${id}:`, error);
       throw error;
     }
+  },
+
+  /**
+   * Get all courses for all categories (Unified popular courses fetch)
+   * @returns {Promise}
+   */
+  getPopularCoursesByCategory: async () => {
+    try {
+      const response = await apiClient.get(ENDPOINTS.ALL_COURSES_BY_CATEGORY);
+      return response;
+    } catch (error) {
+      console.error("Failed to fetch categorized courses:", error);
+      throw error;
+    }
   }
 };
 

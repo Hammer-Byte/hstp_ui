@@ -10,22 +10,19 @@ const SkillBasedCourses = ({ className }) => {
       title: "Hospitality Industry SOPs",
       rating: 4.7,
       badge: "Best Selling Category",
-      bgColor: "bg-[#A5F3FC]", // Cyan
-      personImage: "/expert.svg"
+      personImage: "/sample-course.png"
     },
     {
       title: "Hospitality Industry SOPs",
       rating: 4.7,
       badge: "Best Selling Category",
-      bgColor: "bg-[#FFB488]", // Orange
-      personImage: "/expert.svg"
+      personImage: "/sample-course.png"
     },
     {
       title: "Hospitality Industry SOPs",
       rating: 4.7,
       badge: "Best Selling Category",
-      bgColor: "bg-[#F0F3A5]", // Yellow
-      personImage: "/expert.svg"
+      personImage: "/sample-course.png"
     }
   ];
 
