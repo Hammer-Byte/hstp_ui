@@ -8,12 +8,12 @@ import Header from "@/components/Header";
 export default function ClientLayout({ children }) {
   const pathname = usePathname();
 
-  const isAuthRoute = pathname === "/login" || pathname === "/register";
+  const hideLayout = pathname === "/login" || pathname === "/register" || pathname === "/onboarding";
   return (
     <>
-      <Header />
+      {!hideLayout && <Header />}
       {children}
-      {!isAuthRoute && <Footer />}
+      {!hideLayout && <Footer />}
     </>
   );
 }

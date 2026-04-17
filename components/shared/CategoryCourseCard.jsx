@@ -2,114 +2,105 @@
 
 import React from "react";
 import Image from "next/image";
-import { Star, Heart, Users } from "lucide-react";
+import { Star, Heart, User, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { cn, getImageUrl } from "@/lib/utils";
 
+import { useRouter } from "next/navigation";
+
 const CategoryCourseCard = ({ 
+  id,
   image, 
   title, 
   author, 
   rating, 
   reviewsCount, 
   price, 
-  originalPrice,
-  badgeText,
-  tags = [],
   isWishlisted = false,
-  isSelected = false,
-  showWishlist = true,
+  showWishlist = false,
   className
 }) => {
+  const router = useRouter();
+
   return (
     <div className={cn(
-      "group bg-white rounded-[16px] border p-3.5 transition-all hover:shadow-2xl flex flex-col gap-4 w-full",
-      "border-[#E2E8F0]",
+      "group bg-white rounded-[24px] overflow-hidden transition-all flex flex-col gap-2 w-full border-none font-dm-sans py-0.5",
       className
     )}>
-      {/* Image Section */}
-      <div className="relative aspect-16/10 w-full rounded-[12px] overflow-hidden shrink-0">
-        <Image
-          src={getImageUrl(image)}
-          alt={title}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-        {/* Wishlist Button */}
+      {/* Image Section - Refined Proportions */}
+      <div className="relative w-full aspect-[1.75/1] px-1">
+        <div className="relative w-full h-full rounded-[20px] border-4 border-[#0095FF] overflow-hidden bg-[#F5F5F5]">
+          <Image
+            src={getImageUrl(image)}
+            alt={title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          
+          {/* Popular Badge - More Compact Overlay */}
+          <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1 bg-black/50 backdrop-blur-md px-2 py-0.5 rounded-[6px]">
+             <div className="bg-white rounded-full p-0.5">
+               <Flame className="w-3 h-3 text-[#FF4D00] fill-[#FF4D00]" />
+             </div>
+             <span className="text-white text-[12px] font-bold tracking-tight">Popular</span>
+          </div>
+        </div>
+
+        {/* Wishlist Button - Small */}
         {showWishlist && (
           <Button 
             variant="ghost" 
-            className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/40 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-red-500 p-0 transition-all active:scale-90"
+            className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white p-0"
           >
-            <Heart className={cn("w-4 h-4", isWishlisted && "fill-current text-red-500")} />
+            <Heart className={cn("w-3.5 h-3.5", isWishlisted && "fill-current text-red-500")} />
           </Button>
         )}
       </div>
 
-      {/* Content Section */}
-      <div className="flex flex-col flex-1 gap-2.5">
-        <div className="space-y-1">
-          <h3 className="text-[18px] md:text-[20px] lg:text-[22px] 2xl:text-[24px] font-semibold text-[#1A1A1A] leading-tight line-clamp-2 min-h-[52px]">
+      {/* Content Section - Extremely Tight Spacing */}
+      <div className="flex flex-col gap-1.5 px-3 pb-0.5">
+        <div className="space-y-0 text-left">
+          <h3 className="text-[17px] md:text-[19px] font-bold text-[#1A1A1A] leading-snug line-clamp-1">
             {title}
           </h3>
           {author && (
-            <p className="text-[11px] md:text-[12px] lg:text-[13px] xl:text-[13px] 2xl:text-[14px] text-[#5F5F5F] font-semibold">by {author}</p>
+            <p className="text-[12px] md:text-[13px] text-[#717171] font-semibold italic">by {author}</p>
           )}
         </div>
 
-        {/* Rating & reviews count */}
-        {reviewsCount > 0 && (
-          <div className="flex items-center gap-1.5">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star 
-                  key={i} 
-                  className={cn(
-                    "w-3.5 h-3.5 2xl:w-4 2xl:h-4",
-                    i < Math.floor(rating || 0)
-                      ? "fill-[#FFC107] text-[#FFC107]" 
-                      : "fill-[#E0E0E0] text-[#E0E0E0]"
-                  )} 
-                />
-              ))}
-            </div>
-            <span className="text-[11px] md:text-[11px] lg:text-[10px] xl:text-[11px] 2xl:text-[12px] font-medium text-black">({reviewsCount})</span>
-          </div>
-        )}
-
-        {/* Badges Row */}
-        {(badgeText || (tags && tags.length > 0)) && (
-          <div className="flex flex-wrap gap-2">
-            {badgeText && (
-              <Badge className="px-3 py-1 bg-[#E3D4FF] text-[#673AB7] text-[11px] md:text-[13px] lg:text-[13px] 2xl:text-[15px] font-semibold rounded-[4px] border-none hover:bg-[#E3D4FF]">
-                {badgeText}
-              </Badge>
-            )}
-            {tags?.map((tag, index) => (
-              <Badge key={index} className="px-3 py-1 bg-[#FFF6A2] text-[#CBB300] text-[11px] md:text-[13px] lg:text-[13px] 2xl:text-[15px] font-semibold rounded-[4px] border-none hover:bg-[#FFF4B0]">
-                {tag}
-              </Badge>
+        {/* Rating Row - Minimal */}
+        <div className="flex items-center gap-1.5">
+          <div className="flex gap-0.5">
+            {[...Array(5)].map((_, i) => (
+              <Star 
+                key={i} 
+                className={cn(
+                  "w-4 h-4",
+                  i < Math.floor(rating || 0)
+                    ? "fill-[#FFB800] text-[#FFB800]" 
+                    : "fill-[#E0E0E0] text-[#E0E0E0]"
+                )} 
+              />
             ))}
           </div>
-        )}
+          <div className="flex items-center gap-1 ml-0.5">
+             <User className="w-3.5 h-3.5 text-[#1A1A1A] opacity-40" />
+             <span className="text-[14px] font-bold text-[#1A1A1A]">({reviewsCount || 0})</span>
+          </div>
+        </div>
 
-        {/* Price Row */}
-        <div className="flex items-baseline gap-2 pt-1">
-          {originalPrice && (
-            <div className="text-[14px] md:text-[15px] lg:text-[16px] 2xl:text-[18px] text-[#9EA1A7] line-through font-semibold">
-              ₹ {originalPrice}/-
-            </div>
-          )}
-          <div className="text-[18px] md:text-[20px] lg:text-[22px] 2xl:text-[24px] font-bold text-[#1A1A1A]">
+        {/* Action Row - Efficient use of space */}
+        <div className="flex items-center gap-2 pt-1.5">
+          <Button 
+            className="flex-1 h-[48px] bg-[#673AB7] hover:bg-[#5E35A6] text-[17px] font-bold rounded-[14px] shadow-md shadow-primary/20 transition-all"
+            onClick={() => router.push(`/course-details/${id || '1'}`)}
+          >
+            Explore
+          </Button>
+          <div className="text-[17px] md:text-[19px] font-black text-[#1A1A1A] whitespace-nowrap">
             ₹ {price}/-
           </div>
         </div>
-
-        {/* Action Button */}
-        <Button className="w-full h-10 md:h-11 lg:h-11 xl:h-12 2xl:h-12 bg-primary hover:bg-primary/90 text-[15px] md:text-[16px] font-semibold rounded-[10px] mt-1 transition-all">
-          Purchase
-        </Button>
       </div>
     </div>
   );

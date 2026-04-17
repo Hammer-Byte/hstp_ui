@@ -5,7 +5,11 @@ import Image from "next/image";
 import { Star, ArrowRight } from "lucide-react";
 import { cn, getImageUrl } from "@/lib/utils";
 
-const SkillBasedCard = ({ title, rating, badge, personImage, className }) => {
+import { useRouter } from "next/navigation";
+
+const SkillBasedCard = ({ id, title, rating, badge, personImage, className }) => {
+  const router = useRouter();
+
   return (
     <div className={cn(
       "group bg-white rounded-[42px] border border-[#D9D9D9] flex flex-col items-center text-center w-full sm:max-w-[350px] lg:max-w-[400px] xl:max-w-[430px] transition-all hover:shadow-xl hover:shadow-primary/5 overflow-hidden",
@@ -39,7 +43,10 @@ const SkillBasedCard = ({ title, rating, badge, personImage, className }) => {
           </div>
         </div>
 
-        <button className="flex items-center justify-center gap-2 text-[16px] font-bold text-text-main hover:text-primary transition-all group/btn mt-2 cursor-pointer bg-transparent border-none">
+        <button 
+          className="flex items-center justify-center gap-2 text-[16px] font-bold text-text-main hover:text-primary transition-all group/btn mt-2 cursor-pointer bg-transparent border-none"
+          onClick={() => router.push(`/course-details/${id || '1'}`)}
+        >
             Go to course
             <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
         </button>

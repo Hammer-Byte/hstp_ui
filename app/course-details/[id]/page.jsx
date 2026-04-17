@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { MobileView } from "./MobileView";
-import { DesktopView } from "./DesktopView";
+import { MobileView } from "../../course-detail/MobileView";
+import { DesktopView } from "../../course-detail/DesktopView";
 
 export default function CourseDetailPage() {
   return (
@@ -19,5 +19,3 @@ export default function CourseDetailPage() {
     </>
   );
 }
-
-

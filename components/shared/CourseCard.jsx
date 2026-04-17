@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn, getImageUrl } from "@/lib/utils";
 
+import { useRouter } from "next/navigation";
+
 const CourseCard = ({ 
+  id,
   image, 
   title, 
   author, 
@@ -19,6 +22,8 @@ const CourseCard = ({
   isSelected = false,
   className
 }) => {
+  const router = useRouter();
+
   return (
     <div className={cn(
       "group bg-white rounded-[24px] border p-3 transition-all hover:shadow-xl hover:shadow-gray-200/50 flex flex-col gap-4 md:w-[300px] lg:w-[350px] xl:w-[370px] 2xl:w-[400px] h-[400px] md:h-[430px] lg:h-[470px] xl:h-[480px] 2xl:h-[510px] shrink-0",
@@ -91,8 +96,11 @@ const CourseCard = ({
         </div>
 
         {/* Action Button */}
-        <Button className="w-full h-12 bg-primary hover:bg-primary/90 md:text-[16px] xl:text-[17px] lg:text-[18px] font-bold rounded-full mt-2 transition-all active:scale-[0.98]">
-          Purchase
+        <Button 
+          className="w-full h-12 bg-primary hover:bg-primary/90 md:text-[16px] xl:text-[17px] lg:text-[18px] font-bold rounded-full mt-2 transition-all active:scale-[0.98]"
+          onClick={() => router.push(`/course-details/${id || '1'}`)}
+        >
+          Explore
         </Button>
       </div>
     </div>

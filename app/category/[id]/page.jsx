@@ -110,52 +110,62 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="bg-white min-h-screen pb-20 pt-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div className="mb-16">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-            <div className="flex-1 space-y-6">
-              <div className="space-y-2">
-                <h1 className="font-semibold text-[#1A1A1A] leading-tight">
-                  {categoryName} Courses
-                </h1>
-                <p className="text-[12px] mg:text-[13px] lg:text-[14px] xl:text-[15px] 2xl:text-[16px] text-black font-regular max-w-2xl">
-                  {categoryDescription}
-                </p>
+    <div className="bg-white min-h-screen pb-20 pt-6 md:pt-10 font-dm-sans">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Compact Category Header Section */}
+        <div className="mb-8 md:mb-12 text-center md:text-left border-b border-gray-50 pb-8">
+          <div className="flex flex-col gap-4">
+            <div className="space-y-3">
+              <div className="inline-block px-3 py-1 bg-primary/5 rounded-full mb-1">
+                <span className="text-[12px] font-bold text-primary uppercase tracking-widest">Category</span>
+              </div>
+              <h1 className="text-[32px] md:text-[44px] lg:text-[52px] font-black text-[#1A1A1A] leading-[1.1] tracking-tight">
+                {categoryName} <span className="text-primary tracking-normal">Courses</span>
+              </h1>
+              <p className="text-[15px] md:text-[17px] text-[#5F5F5F] font-medium max-w-2xl mx-auto md:mx-0 leading-snug">
+                {categoryDescription}
+              </p>
+            </div>
+
+            <div className="flex flex-row justify-center md:justify-start items-center gap-8 md:gap-12 pt-4">
+              <div className="flex flex-col items-center md:items-start gap-1">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <Users className="w-3.5 h-3.5" />
+                  </div>
+                  <p className="text-[11px] md:text-[12px] font-bold text-[#808080] uppercase tracking-widest">Learners</p>
+                </div>
+                <span className="text-[24px] md:text-[28px] font-black text-[#1A1A1A]">{totalLearners}</span>
+              </div>
+              
+              <div className="h-8 w-px bg-gray-200" />
+
+              <div className="flex flex-col items-center md:items-start gap-1">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <div className="w-6 h-6 rounded-full bg-yellow-400/10 flex items-center justify-center text-yellow-600">
+                    <GraduationCap className="w-3.5 h-3.5" />
+                  </div>
+                  <p className="text-[11px] md:text-[12px] font-bold text-[#808080] uppercase tracking-widest">Courses</p>
+                </div>
+                <span className="text-[24px] md:text-[28px] font-black text-[#1A1A1A]">{totalCourses}</span>
               </div>
 
               {categoryData?.category_rating && (
-                <div className="flex items-center gap-2">
-                  <span className="text-[12px] mg:text-[13px] lg:text-[14px] xl:text-[15px] 2xl:text-[16px] font-bold text-[#1A1A1A]">Category Rating :</span>
-                  <div className="flex items-center gap-1.5">
-                    <Star className="w-4 h-4 fill-[#FFC107] text-[#FFB60C]" />
-                    <span className="text-[12px] mg:text-[13px] lg:text-[14px] xl:text-[15px] 2xl:text-[16px] font-bold text-[#1A1A1A]">{categoryData.category_rating}</span>
+                <>
+                  <div className="hidden sm:block h-8 w-px bg-gray-200" />
+                  <div className="hidden sm:flex flex-col items-center md:items-start gap-1">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <div className="w-6 h-6 rounded-full bg-orange-400/10 flex items-center justify-center text-orange-500">
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                      </div>
+                      <p className="text-[11px] md:text-[12px] font-bold text-[#808080] uppercase tracking-widest">Rating</p>
+                    </div>
+                    <span className="text-[24px] md:text-[28px] font-black text-[#1A1A1A]">{categoryData.category_rating}</span>
                   </div>
-                </div>
+                </>
               )}
-
-              <div className="flex items-center gap-12 pt-2">
-                <div className="space-y-1">
-                  <p className="text-[12px] mg:text-[13px] lg:text-[14px] xl:text-[15px] 2xl:text-[16px] font-bold text-[#1A1A1A]">Total Learners</p>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-[#1A1A1A]" />
-                    <span className="text-[20px] md:text-[22px] lg:text-[24px] xl:text-[24px] 2xl:text-[26px] font-medium text-[#1A1A1A]">{totalLearners}</span>
-                  </div>
-                </div>
-                
-                <div className="h-10 w-[1.5px] bg-[#D9D9D9]" />
-
-                <div className="space-y-1">
-                  <p className="text-[12px] mg:text-[13px] lg:text-[14px] xl:text-[15px] 2xl:text-[16px] font-bold text-[#1A1A1A]">Number of Courses</p>
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="w-5 h-5 text-[#1A1A1A]" />
-                    <span className="text-[20px] md:text-[22px] lg:text-[24px] xl:text-[24px] 2xl:text-[26px] font-medium text-[#1A1A1A]">{totalCourses}</span>
-                  </div>
-                </div>
-              </div>
             </div>
-            
-            {/* Image Placeholder logic can go here later */}
           </div>
         </div>
 

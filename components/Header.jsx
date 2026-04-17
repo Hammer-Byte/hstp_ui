@@ -106,16 +106,9 @@ export default function Header() {
                     
                     {!isAuthPage && (
                       <div className="pt-4 border-t border-gray-100 flex flex-col gap-2">
-                         <p className="text-[10px] font-bold text-text-shaded uppercase tracking-wider mb-2">Account</p>
+                        <p className="text-[10px] font-bold text-text-shaded uppercase tracking-wider mb-2">Account</p>
                         <Button 
-                          variant="outline" 
-                          className="w-full rounded-full border-primary text-primary hover:bg-primary/5"
-                          onClick={() => router.push('/register')}
-                        >
-                          Sign-Up
-                        </Button>
-                        <Button 
-                          className="w-full rounded-full bg-primary hover:bg-primary/90"
+                          className="w-full rounded-full bg-primary hover:bg-primary/90 font-bold"
                           onClick={() => router.push('/login')}
                         >
                           Sign-In
@@ -257,15 +250,7 @@ export default function Header() {
             <div className="hidden items-center space-x-2 md:flex">
               {!isAuthPage && 
               <Button 
-              variant="outline" 
-              className="rounded-full px-4 xl:px-6 border-primary text-primary hover:bg-primary/5 transition-all text-sm h-9 xl:h-10"
-              onClick={() => router.push('/register')}
-              >
-                Sign-Up
-              </Button>}
-              {!isAuthPage && 
-              <Button 
-                className="rounded-full px-4 xl:px-6 bg-primary hover:bg-primary/90 transition-all text-sm h-9 xl:h-10"
+                className="rounded-full px-4 xl:px-6 bg-primary hover:bg-primary/90 transition-all text-sm h-9 xl:h-10 font-bold"
                 onClick={() => router.push('/login')}
               >
                 Sign-In
