@@ -70,8 +70,8 @@ export default function Carousels({ initialData }) {
   const showSkeleton = isLoading;
 
   return (
-    <section className="m-0">
-      <h2 className="font-semibold text-center mt-12 mb-8">
+    <section className="w-full flex flex-col gap-6 md:gap-8 m-0">
+      <h2 className="font-semibold text-center m-0">
         Learn Skills{" "}
         <span className="text-primary">That Matter</span>
       </h2>

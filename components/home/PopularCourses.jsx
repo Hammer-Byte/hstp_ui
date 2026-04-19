@@ -162,7 +162,7 @@ const PopularCourses = ({ title, highlight, items: itemsProp = [], className, in
           <div className="relative border-b border-[#E5E5E5]">
             <TabsList 
               ref={tabsListRef} 
-              className="relative bg-transparent pb-0 gap-8 md:gap-10 h-auto border-none flex-nowrap justify-start leading-none overflow-x-auto no-scrollbar w-fit"
+              className="relative bg-transparent pb-0 gap-6 md:gap-10 h-auto border-none flex-nowrap justify-start leading-none overflow-x-auto no-scrollbar w-full"
             >
               {isLoading ? (
                 // Render 4 tab skeletons while loading

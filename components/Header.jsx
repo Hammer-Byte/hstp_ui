@@ -31,8 +31,13 @@ export default function Header() {
   const router = useRouter();
   const isAuthPage = pathname === '/login' || pathname === '/register';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  React.useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   // Dynamic API categories
   const { data: apiCategories } = useQuery({
@@ -54,16 +59,16 @@ export default function Header() {
 
   const categories = categoriesList;
   return (
-    <header className="sticky top-0 z-50 w-full h-16 border-b bg-[#FAFAFA] backdrop-blur-none shadow-sm">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full h-16 md:h-20 border-b border-white/10 bg-primary md:bg-white text-white md:text-black shadow-md">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex h-full items-center justify-between gap-4">
           <div className="flex items-center gap-2 md:gap-5 flex-1 md:flex-none">
             {/* Mobile Menu - Visible below xl */}
             <div className="xl:hidden">
-              <Drawer direction="left">
+              <Drawer direction="left" open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <DrawerTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-9 w-9">
-                    <Menu className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="h-9 w-9 text-white hover:bg-white/10 hover:text-white">
+                    <Menu className="h-6 w-6" />
                   </Button>
                 </DrawerTrigger>
                 <DrawerContent className="h-full w-[280px]">
@@ -129,14 +134,14 @@ export default function Header() {
             </div>
 
             {/* Logo */}
-            <div className="flex shrink-0">
+            <div className="flex shrink-0 ml-1">
               <Link href="/" className="flex items-center">
-                <span className="text-lg md:text-xl font-bold tracking-tight text-foreground">Name/logo</span>
+                <span className="text-[17px] md:text-xl font-semibold tracking-wide text-white md:text-black">App Name</span>
               </Link>
             </div>
 
             {/* Search Bar - Hidden on small screens, expands on lg */}
-            <div className="hidden sm:flex items-center px-1 md:px-2 flex-1 md:flex-none">
+            <div className="hidden md:flex items-center px-1 md:px-2 flex-1 md:flex-none">
               <div className="relative w-full group">
                 <Search className={`absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transition-colors ${isSearchFocused ? 'text-primary' : 'text-muted-foreground'}`} />
                 <Input
@@ -244,13 +249,13 @@ export default function Header() {
               <Search className="h-5 w-5" />
             </Button>
 
-            <button className="p-2 transition-colors hover:text-primary shrink-0">
-              <ShoppingBag className="h-5 w-5" />
+            <button className="p-2 transition-colors hover:bg-white/10 rounded-full shrink-0 mr-0 md:mr-4">
+              <ShoppingBag className="h-6 w-6 md:h-7 md:w-7" strokeWidth={1.5} />
             </button>
             <div className="hidden items-center space-x-2 md:flex">
               {!isAuthPage && 
               <Button 
-                className="rounded-full px-4 xl:px-6 bg-primary hover:bg-primary/90 transition-all text-sm h-9 xl:h-10 font-bold"
+                className="rounded-full px-4 xl:px-6 bg-white text-[#3F11A4] hover:bg-white/90 transition-all text-sm h-9 xl:h-10 font-bold"
                 onClick={() => router.push('/login')}
               >
                 Sign-In

@@ -85,15 +85,18 @@ const SkillBasedCourses = ({ className, initialData }) => {
           Skill-Based <span className="text-primary">Learning Paths</span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10 2xl:gap-12 justify-center">
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto md:overflow-visible gap-6 md:gap-8 xl:gap-10 2xl:gap-12 snap-x snap-mandatory pb-6 px-4 md:px-0 -mx-4 md:mx-0 scrollbar-hide">
           {isLoading ? (
-            [...Array(3)].map((_, i) => <SkillBasedCardSkeleton key={i} />)
+            [...Array(3)].map((_, i) => (
+              <div key={i} className="min-w-[85vw] sm:min-w-[350px] md:min-w-0 flex justify-center snap-center">
+                <SkillBasedCardSkeleton />
+              </div>
+            ))
           ) : (
             learningPaths.map((path, index) => (
-              <SkillBasedCard
-                key={index}
-                {...path}
-              />
+              <div key={index} className="min-w-[85vw] sm:min-w-[350px] md:min-w-0 flex justify-center snap-center">
+                <SkillBasedCard {...path} />
+              </div>
             ))
           )}
         </div>

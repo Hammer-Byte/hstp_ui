@@ -1,3 +1,4 @@
+import HomeSearchSection from "@/components/home/HomeSearchSection";
 import Hero from "@/components/home/Hero";
 import HomeSkillCarousel from "@/components/home/HomeSkillCarousel";
 import PopularCourses from "@/components/home/PopularCourses";
@@ -88,8 +89,9 @@ export default async function Home() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="bg-white min-h-screen">
+        <HomeSearchSection userName="Shivam" />
         <Hero />
-        <div className="container mx-auto py-8 md:py-10 lg:py-12 xl:py-14 px-4 sm:px-6 lg:px-8 space-y-20">
+        <div className="container mx-auto py-6 md:py-10 lg:py-12 xl:py-14 px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16 lg:space-y-20">
           <Carousels initialData={initialCategories} />
           <PopularCourses 
             title="Popular"

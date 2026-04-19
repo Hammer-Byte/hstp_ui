@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { 
   Star, 
   Check, 
@@ -19,7 +21,8 @@ import {
   PlayCircle,
   Layout,
   Users,
-  GraduationCap
+  GraduationCap,
+  Edit
 } from "lucide-react";
 import { 
   Accordion,
@@ -92,6 +95,7 @@ const DynamicStarRating = ({ rating, count }) => {
 };
 
 export function DesktopView() {
+  const params = useParams();
   const modules = [
     {
       title: "Module 1 : Introduction to Data Science",
@@ -182,7 +186,12 @@ export function DesktopView() {
 
             <div className="flex-1 py-2">
               <div className="">
-                <h1>Full Roadmap Of Data Science</h1>
+                <h1>
+                  Full Roadmap Of Data Science
+                  <Link href={`/edit-course/${params?.id || '1'}`} className="inline-block ml-2 text-primary hover:opacity-80 align-baseline cursor-pointer">
+                    <Edit className="w-6 h-6 inline" />
+                  </Link>
+                </h1>
                 <p className="text-sm md:text-base lg:text-base xl:text-lg text-text-shaded font-medium">By Hammerbyte</p>
               </div>
 

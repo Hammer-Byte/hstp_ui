@@ -2,6 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { 
   Star, 
   Check, 
@@ -13,7 +15,8 @@ import {
   ArrowLeft,
   Bookmark,
   Users,
-  GraduationCap
+  GraduationCap,
+  Edit
 } from "lucide-react";
 import { 
   Accordion,
@@ -31,6 +34,7 @@ import {
 } from "@/components/ui/carousel";
 
 export function MobileView() {
+  const params = useParams();
   const learningObjectives = [
     "Recognize cardiac and respiratory emergencies.",
     "Perform high-quality CPR for adults, children, and infants.",
@@ -73,7 +77,7 @@ export function MobileView() {
   return (
     <div className="flex flex-col min-h-screen bg-white md:hidden font-dm-sans pb-20">
       {/* Hero Header */}
-      <div className="relative w-full aspect-[4/3] rounded-b-[30px] overflow-hidden shadow-lg">
+      <div className="relative w-full aspect-4/3 rounded-b-[30px] overflow-hidden shadow-lg">
         <Image 
           src="/sample-detail.png" 
           alt="Course Pitch" 
@@ -130,11 +134,16 @@ export function MobileView() {
 
         {/* Title & Description */}
         <div className="space-y-1">
-          <h1 className="text-[26px] font-bold text-[#673AB7] leading-tight">Basic Life Support (BLS)</h1>
+          <h1 className="text-[26px] font-bold text-[#673AB7] leading-tight">
+            Basic Life Support (BLS)
+            <Link href={`/edit-course/${params?.id || '1'}`} className="inline-block ml-2 align-baseline cursor-pointer">
+              <Edit className="w-5 h-5 inline text-[#673AB7] hover:opacity-80" />
+            </Link>
+          </h1>
           <p className="text-sm font-medium text-gray-500">By medmedia</p>
         </div>
 
-        <p className="text-[15px] font-normal text-[#1A1A1A] leading-[1.5] opacity-90">
+        <p className="text-[15px] font-normal text-[#1A1A1A] leading-normal opacity-90">
           Basic Life Support (BLS) is a critical emergency training program designed for hospital staff to respond effectively to life-threatening situations such as cardiac arrest, respiratory failure, and choking.
         </p>
 

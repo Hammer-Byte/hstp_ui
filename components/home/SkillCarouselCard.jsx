@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function CarouselCard({ item }) {
   return (
     <div className="group  m-2 rounded-[2.5rem] border-2 border-black bg-white transition-all duration-300 shadow-[0px_6px_3px_#a9a9a9]">
-      <div className="relative aspect-square overflow-hidden rounded-t-[2.4rem]">
+      <div className="relative aspect-[4/3] xl:aspect-[5/4] overflow-hidden rounded-t-[2.4rem]">
         <img
           src={getImageUrl(item.image)}
           alt={item.title}
@@ -39,7 +39,7 @@ export default function CarouselCard({ item }) {
 export function SkillCarouselCardSkeleton() {
   return (
     <div className="m-2 rounded-[2.5rem] border-2 border-slate-200 bg-white animate-pulse">
-      <div className="relative aspect-square overflow-hidden rounded-t-[2.4rem] bg-slate-200" />
+      <div className="relative aspect-[4/3] xl:aspect-[5/4] overflow-hidden rounded-t-[2.4rem] bg-slate-200" />
       <div className="flex items-center justify-between p-4">
         <div className="h-9 lg:h-10 w-24 bg-slate-200 rounded-full" />
         <div className="w-10 h-10 border-3 border-slate-200 rounded-full" />
